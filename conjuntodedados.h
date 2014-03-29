@@ -11,11 +11,13 @@ using namespace std;
 class ConjuntoDeDados
 {
 public:
-    ConjuntoDeDados();
+    ConjuntoDeDados(int classes);
 
+    int classes();
     const vector<Ponto*> pontos();
 
 protected:
+    int _classes;
     vector<Ponto*> _pontos;
 };
 

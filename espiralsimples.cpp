@@ -1,6 +1,6 @@
 #include "espiralsimples.h"
 
-EspiralSimples::EspiralSimples(int numero_pontos)
+EspiralSimples::EspiralSimples(int numero_pontos) : ConjuntoDeDados(1)
 {
     float a = 1.0f;
     float b = 1.0f;
@@ -16,7 +16,7 @@ EspiralSimples::EspiralSimples(int numero_pontos)
         vector<float> coordenadas;
         coordenadas.push_back(ponto_x);
         coordenadas.push_back(ponto_y);
-        _pontos.push_back(new Ponto(coordenadas));
+        _pontos.push_back(new Ponto(coordenadas, 0));
 
         theta += passo;
     }

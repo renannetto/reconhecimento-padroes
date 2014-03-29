@@ -1,8 +1,9 @@
 #include "ponto.h"
 
-Ponto::Ponto(vector<float> coordenadas)
+Ponto::Ponto(vector<float> coordenadas, int classe)
 {
     _coordenadas = coordenadas;
+    _classe = classe;
 }
 
 int Ponto::dimensoes()
@@ -10,9 +11,14 @@ int Ponto::dimensoes()
     return _coordenadas.size();
 }
 
-const vector<float> Ponto::coordenadas()
+int Ponto::classe()
 {
-    return _coordenadas;
+    return _classe;
+}
+
+float Ponto::at(int dimensao)
+{
+    return _coordenadas.at(dimensao);
 }
 
 float Ponto::x()

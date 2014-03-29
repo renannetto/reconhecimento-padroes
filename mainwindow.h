@@ -4,8 +4,14 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 
+#include "paletadecores.h"
 #include "geracaoespiral.h"
+#include "geracaoaleatorio.h"
 #include "espiralsimples.h"
+#include "nearestneighbor.h"
+#include "distanciahamming.h"
+#include "distanciaeuclides.h"
+#include "capturaeventos.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,16 +29,22 @@ public:
 
 public slots:
     void gerarEspiral();
+    void gerarAleatorio();
     void classificar();
+    void dados(ConjuntoDeDados * dados);
 
 private:
-    Ui::MainWindow *ui;
-    QGraphicsScene * viewport;
+    Ui::MainWindow * _ui;
+    QGraphicsScene * _viewport;
 
-    GeracaoEspiral * espirais;
+    GeracaoEspiral * _espirais;
+    GeracaoAleatorio * _aleatorio;
 
-    Ponto transformar(Ponto * ponto);
+    CapturaEventos * _eventos;
 
+    ConjuntoDeDados * _dados;
+
+    Distancia * distancia();
 };
 
 #endif // MAINWINDOW_H

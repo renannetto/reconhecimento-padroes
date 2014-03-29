@@ -22,4 +22,8 @@ void GeracaoEspiral::gerarEspiral()
     int numero_pontos = ui->pontos_edit->text().toInt();
     EspiralSimples * espiral = new EspiralSimples(numero_pontos);
     main_window->desenharPontos(espiral->pontos());
+
+    setVisible(false);
+
+    delete espiral;
 }
