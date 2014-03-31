@@ -11,5 +11,7 @@ ConjuntoAleatorio::ConjuntoAleatorio(int classes, int numero_pontos, int min_x, 
         coordenadas.push_back(y);
         int classe = rand() % classes;
         _pontos.push_back(new Ponto(coordenadas, classe));
+
+        cout << "Ponto (" << x << ", " << y << "), classe " << classe << endl;
     }
 }

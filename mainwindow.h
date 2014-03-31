@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QFileDialog>
 
 #include "paletadecores.h"
 #include "geracaoespiral.h"
@@ -11,7 +12,7 @@
 #include "nearestneighbor.h"
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
-#include "capturaeventos.h"
+#include "canvas.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,13 +26,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void mousePressEvent(QMouseEvent *event);
     void desenharPontos(vector<Ponto*> ponto);
+    void dados(ConjuntoDeDados * dados);
 
 public slots:
     void gerarEspiral();
     void gerarAleatorio();
     void classificar();
-    void dados(ConjuntoDeDados * dados);
+    void carregarArquivo();
 
 private:
     Ui::MainWindow * _ui;
@@ -40,11 +43,12 @@ private:
     GeracaoEspiral * _espirais;
     GeracaoAleatorio * _aleatorio;
 
-    CapturaEventos * _eventos;
-
     ConjuntoDeDados * _dados;
 
     Distancia * distancia();
+
+    Ponto transformar(Ponto ponto);
+    Ponto transformarInversa(Ponto ponto);
 };
 
 #endif // MAINWINDOW_H

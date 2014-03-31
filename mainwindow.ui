@@ -30,7 +30,7 @@
      <attribute name="title">
       <string>2D</string>
      </attribute>
-     <widget class="QGraphicsView" name="graphicsView">
+     <widget class="Canvas" name="graphicsView">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -120,7 +120,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>71</width>
+        <width>291</width>
         <height>16</height>
        </rect>
       </property>
@@ -130,16 +130,16 @@
        </font>
       </property>
       <property name="text">
-       <string>Ponto:</string>
+       <string>Ponto (separar com espaço):</string>
       </property>
      </widget>
-     <widget class="QTextEdit" name="textEdit">
+     <widget class="QLineEdit" name="novo_ponto">
       <property name="geometry">
        <rect>
-        <x>80</x>
+        <x>290</x>
         <y>10</y>
-        <width>221</width>
-        <height>251</height>
+        <width>351</width>
+        <height>23</height>
        </rect>
       </property>
      </widget>
@@ -166,7 +166,7 @@
    <widget class="QLabel" name="classe_label">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>540</x>
       <y>700</y>
       <width>57</width>
       <height>15</height>
@@ -206,7 +206,7 @@
       <string>Hamming</string>
      </property>
      <property name="checked">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="euclides_radio">
@@ -220,6 +220,9 @@
      </property>
      <property name="text">
       <string>Euclides</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -345,6 +348,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Canvas</class>
+   <extends>QGraphicsView</extends>
+   <header>canvas.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -371,7 +381,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>507</x>
-     <y>503</y>
+     <y>657</y>
     </hint>
     <hint type="destinationlabel">
      <x>524</x>
@@ -395,6 +405,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>carregar_arquivo</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>carregarArquivo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>328</x>
+     <y>393</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>gerarEspiral()</slot>
@@ -402,5 +428,6 @@
   <slot>definirClassificador()</slot>
   <slot>definirDistancia()</slot>
   <slot>gerarAleatorio()</slot>
+  <slot>carregarArquivo()</slot>
  </slots>
 </ui>

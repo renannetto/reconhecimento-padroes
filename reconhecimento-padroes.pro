@@ -17,13 +17,32 @@ SOURCES += main.cpp\
     ponto.cpp \
     conjuntodedados.cpp \
     espiralsimples.cpp \
-    geracaoespiral.cpp
+    geracaoespiral.cpp \
+    conjuntoaleatorio.cpp \
+    distancia.cpp \
+    distanciaeuclides.cpp \
+    distanciahamming.cpp \
+    geracaoaleatorio.cpp \
+    nearestneighbor.cpp \
+    paletadecores.cpp \
+    canvas.cpp \
+    espiraldupla.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
     conjuntodedados.h \
     espiralsimples.h \
-    geracaoespiral.h
+    geracaoespiral.h \
+    conjuntoaleatorio.h \
+    distancia.h \
+    distanciaeuclides.h \
+    distanciahamming.h \
+    geracaoaleatorio.h \
+    nearestneighbor.h \
+    paletadecores.h \
+    canvas.h \
+    espiraldupla.h
 
 FORMS    += mainwindow.ui \
-    geracaoespiral.ui
+    geracaoespiral.ui \
+    geracaoaleatorio.ui

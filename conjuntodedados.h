@@ -3,6 +3,9 @@
 
 #include <vector>
 #include <math.h>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -12,9 +15,11 @@ class ConjuntoDeDados
 {
 public:
     ConjuntoDeDados(int classes);
+    ConjuntoDeDados(string nome_arquivo);
 
     int classes();
     const vector<Ponto*> pontos();
+    int dimensoes();
 
 protected:
     int _classes;

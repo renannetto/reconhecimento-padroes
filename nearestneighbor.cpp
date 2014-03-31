@@ -21,6 +21,7 @@ int NearestNeighbor::classificar(Ponto *ponto, Distancia * distancia, int vizinh
             if (dist < iterador_custos->first)
             {
                 custos.insert(iterador_custos, pair<float, int>(dist, _pontos.at(indice_ponto)->classe()));
+                break;
             }
         }
         custos.resize(vizinhos);

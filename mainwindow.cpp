@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _aleatorio = new GeracaoAleatorio(this, largura, altura);
     _aleatorio->setVisible(false);
 
-    //_eventos = _ui->graphicsView;
+    _ui->graphicsView->fixarMainWindow(this);
 
     PaletaDeCores::criarPaleta();
 }
@@ -32,6 +32,48 @@ MainWindow::~MainWindow()
     delete _ui;
 
     delete _espirais;
+}
+
+Ponto MainWindow::transformar(Ponto ponto)
+{
+    int largura = _ui->graphicsView->width();
+    int altura = _ui->graphicsView->height();
+
+    float novo_ponto_x = ponto.x() + (largura/2);
+    float novo_ponto_y = (altura/2)-ponto.y();
+    vector<float> coordenadas;
+    coordenadas.push_back(novo_ponto_x);
+    coordenadas.push_back(novo_ponto_y);
+    return Ponto(coordenadas, ponto.classe());
+}
+
+Ponto MainWindow::transformarInversa(Ponto ponto)
+{
+    int largura = _ui->graphicsView->width();
+    int altura = _ui->graphicsView->height();
+
+    float novo_ponto_x = ponto.x()-(largura/2);
+    float novo_ponto_y = (altura/2)-ponto.y();
+    vector<float> coordenadas;
+    coordenadas.push_back(novo_ponto_x);
+    coordenadas.push_back(novo_ponto_y);
+    return Ponto(coordenadas, ponto.classe());
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    vector<float> coordenadas;
+    coordenadas.push_back(event->x());
+    coordenadas.push_back(event->y());
+    Ponto ponto = transformarInversa(Ponto(coordenadas));
+
+    int largura = _ui->graphicsView->width();
+    int altura = _ui->graphicsView->height();
+    if (ponto.x() > -largura/2 && ponto.x() < largura/2 && ponto.y() > -altura/2 && ponto.y() < altura/2)
+    {
+        _ui->ponto_x->setText(QString::number(ponto.x()));
+        _ui->ponto_y->setText(QString::number(ponto.y()));
+    }
 }
 
 void MainWindow::gerarEspiral()
@@ -49,10 +91,10 @@ void MainWindow::desenharPontos(vector<Ponto*> pontos)
     _viewport->clear();
     for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
-        Ponto * ponto = pontos.at(indice_ponto);
-        int classe = ponto->classe();
+        Ponto ponto = transformar(*pontos.at(indice_ponto));
+        int classe = ponto.classe();
         QColor cor = PaletaDeCores::cores.at(classe);
-        _viewport->addEllipse(ponto->x(), ponto->y(), 5.0f, 5.0f, QPen(cor), QBrush(cor));
+        _viewport->addEllipse(ponto.x(), ponto.y(), 5.0f, 5.0f, QPen(cor), QBrush(cor));
     }
 }
 
@@ -70,12 +112,28 @@ void MainWindow::classificar()
     Distancia * distancia = this->distancia();
     NearestNeighbor * nn = new NearestNeighbor(_dados->pontos(), _dados->classes());
 
-    float ponto_x = _ui->ponto_x->text().toFloat();
-    float ponto_y = _ui->ponto_y->text().toFloat();
-    vector<float> coordenadas;
-    coordenadas.push_back(ponto_x);
-    coordenadas.push_back(ponto_y);
-    Ponto * ponto = new Ponto(coordenadas);
+    Ponto * ponto;
+    if (_dados->dimensoes()==2)
+    {
+        float ponto_x = _ui->ponto_x->text().toFloat();
+        float ponto_y = _ui->ponto_y->text().toFloat();
+        vector<float> coordenadas;
+        coordenadas.push_back(ponto_x);
+        coordenadas.push_back(ponto_y);
+        ponto = new Ponto(coordenadas);
+    } else
+    {
+        string atributos_texto = _ui->novo_ponto->text().toStdString();
+        stringstream stream(atributos_texto, stringstream::in);
+        vector<float> atributos;
+        for (int dimensao = 0; dimensao < _dados->dimensoes(); dimensao++)
+        {
+            float atributo;
+            stream >> atributo;
+            atributos.push_back(atributo);
+        }
+        ponto = new Ponto(atributos);
+    }
 
     int vizinhos = _ui->numero_vizinhos->text().toFloat();
 
@@ -92,5 +150,17 @@ void MainWindow::classificar()
 
 void MainWindow::dados(ConjuntoDeDados *dados)
 {
+    if (_dados)
+        delete _dados;
+
     _dados = dados;
+}
+
+void MainWindow::carregarArquivo()
+{
+    if (_dados)
+        delete _dados;
+
+    QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Open file"), "");
+    _dados = new ConjuntoDeDados(nome_arquivo.toStdString());
 }

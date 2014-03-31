@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include "espiralsimples.h"
+#include "espiraldupla.h"
 
 class MainWindow;
 
@@ -23,9 +24,9 @@ public slots:
     void gerarEspiral();
 
 private:
-    Ui::GeracaoEspiral *ui;
+    Ui::GeracaoEspiral *_ui;
 
-    MainWindow * main_window;
+    MainWindow * _main_window;
 };
 
 #endif // GERACAOESPIRAL_H
