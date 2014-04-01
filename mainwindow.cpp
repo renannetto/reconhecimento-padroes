@@ -150,17 +150,11 @@ void MainWindow::classificar()
 
 void MainWindow::dados(ConjuntoDeDados *dados)
 {
-    if (_dados)
-        delete _dados;
-
     _dados = dados;
 }
 
 void MainWindow::carregarArquivo()
 {
-    if (_dados)
-        delete _dados;
-
     QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Open file"), "");
     _dados = new ConjuntoDeDados(nome_arquivo.toStdString());
 }
