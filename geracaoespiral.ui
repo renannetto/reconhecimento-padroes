@@ -209,6 +209,16 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>espiral_simples_radio</tabstop>
+  <tabstop>espiral_dupla_radio</tabstop>
+  <tabstop>numero_pontos</tabstop>
+  <tabstop>rotacao</tabstop>
+  <tabstop>distancia</tabstop>
+  <tabstop>passo</tabstop>
+  <tabstop>ruido</tabstop>
+  <tabstop>gerar_espiral</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

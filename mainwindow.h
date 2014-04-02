@@ -26,7 +26,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void mousePressEvent(QMouseEvent *event);
+    void mousePressEvent(float x, float y);
     void desenharPontos(vector<Ponto*> ponto);
     void dados(ConjuntoDeDados * dados);
 
@@ -38,7 +38,6 @@ public slots:
 
 private:
     Ui::MainWindow * _ui;
-    QGraphicsScene * _viewport;
 
     GeracaoEspiral * _espirais;
     GeracaoAleatorio * _aleatorio;

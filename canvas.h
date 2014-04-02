@@ -18,9 +18,13 @@ class Canvas : public QGraphicsView
 public:
     explicit Canvas(QWidget *parent = 0);
     void fixarMainWindow(MainWindow * main_window);
+    void desenharPonto(Ponto ponto);
+    void limpar();
 
 private:
     MainWindow * _main_window;
+
+    QGraphicsScene * _viewport;
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);

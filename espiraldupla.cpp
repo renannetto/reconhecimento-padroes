@@ -19,8 +19,13 @@ EspiralDupla::EspiralDupla(int numero_pontos, float a, float b, float passo, int
         coordenadas.push_back(ponto_y);
         _pontos.push_back(new Ponto(coordenadas, 0));
 
-        ponto_x = -raio*cos(theta) + rand()%(2*ruido) + ruido;
-        ponto_y = -raio*sin(theta) + rand()%(2*ruido) + ruido;
+        ponto_x = -raio*cos(theta);
+        ponto_y = -raio*sin(theta);
+        if (ruido > 0)
+        {
+            ponto_x += rand()%(2*ruido) + ruido;
+            ponto_y += rand()%(2*ruido) + ruido;
+        }
         coordenadas.clear();
         coordenadas.push_back(ponto_x);
         coordenadas.push_back(ponto_y);

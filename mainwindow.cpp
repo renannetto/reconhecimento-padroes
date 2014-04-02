@@ -11,9 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     _ui->setupUi(this);
 
-    _viewport = new QGraphicsScene(this);
-    _ui->graphicsView->setScene(_viewport);
-
     _espirais = new GeracaoEspiral(this);
     _espirais->setVisible(false);
 
@@ -60,12 +57,12 @@ Ponto MainWindow::transformarInversa(Ponto ponto)
     return Ponto(coordenadas, ponto.classe());
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *event)
+void MainWindow::mousePressEvent(float x, float y)
 {
     vector<float> coordenadas;
-    coordenadas.push_back(event->x());
-    coordenadas.push_back(event->y());
-    Ponto ponto = transformarInversa(Ponto(coordenadas));
+    coordenadas.push_back(x);
+    coordenadas.push_back(y);
+    Ponto ponto(coordenadas);
 
     int largura = _ui->graphicsView->width();
     int altura = _ui->graphicsView->height();
@@ -88,13 +85,10 @@ void MainWindow::gerarAleatorio()
 
 void MainWindow::desenharPontos(vector<Ponto*> pontos)
 {
-    _viewport->clear();
+    _ui->graphicsView->limpar();
     for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
-        Ponto ponto = transformar(*pontos.at(indice_ponto));
-        int classe = ponto.classe();
-        QColor cor = PaletaDeCores::cores.at(classe);
-        _viewport->addEllipse(ponto.x(), ponto.y(), 5.0f, 5.0f, QPen(cor), QBrush(cor));
+        _ui->graphicsView->desenharPonto(*pontos.at(indice_ponto));
     }
 }
 
@@ -155,6 +149,8 @@ void MainWindow::dados(ConjuntoDeDados *dados)
 
 void MainWindow::carregarArquivo()
 {
-    QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Open file"), "");
+    QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Abrir arquivo de dados"), "");
     _dados = new ConjuntoDeDados(nome_arquivo.toStdString());
+
+    _ui->graphicsView->limpar();
 }
