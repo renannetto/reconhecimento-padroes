@@ -17,6 +17,9 @@ public:
     ConjuntoDeDados(int classes);
     ConjuntoDeDados(string nome_arquivo);
 
+    void normalizar();
+    void normalizarPonto(Ponto * ponto);
+
     int classes();
     const vector<Ponto*> pontos();
     int dimensoes();
@@ -24,6 +27,8 @@ public:
 protected:
     int _classes;
     vector<Ponto*> _pontos;
+    Ponto _ponto_max;
+    Ponto _ponto_min;
 };
 
 #endif // CONJUNTODEDADOS_H

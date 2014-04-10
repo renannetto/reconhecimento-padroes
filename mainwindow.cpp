@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _ui->graphicsView->fixarMainWindow(this);
 
     PaletaDeCores::criarPaleta();
+
+    _dados = 0;
+    _classificador = 0;
 }
 
 MainWindow::~MainWindow()
@@ -101,56 +104,72 @@ Distancia * MainWindow::distancia()
     return new DistanciaHamming();
 }
 
+void MainWindow::definirClassificador()
+{
+    if (_dados)
+    {
+        if (_classificador)
+        {
+            delete _classificador;
+        }
+
+        Distancia * distancia = this->distancia();
+        if (_ui->neighbor_radio->isChecked())
+        {
+             int vizinhos = _ui->numero_vizinhos->text().toFloat();
+             _classificador = new NearestNeighbor(distancia, _dados, vizinhos);
+        }
+    }
+}
+
 void MainWindow::classificar()
 {
-    Distancia * distancia = this->distancia();
-    NearestNeighbor * nn = new NearestNeighbor(_dados->pontos(), _dados->classes());
-
-    Ponto * ponto;
-    if (_dados->dimensoes()==2)
+    if (_classificador)
     {
-        float ponto_x = _ui->ponto_x->text().toFloat();
-        float ponto_y = _ui->ponto_y->text().toFloat();
-        vector<float> coordenadas;
-        coordenadas.push_back(ponto_x);
-        coordenadas.push_back(ponto_y);
-        ponto = new Ponto(coordenadas);
-    } else
-    {
-        string atributos_texto = _ui->novo_ponto->text().toStdString();
-        stringstream stream(atributos_texto, stringstream::in);
         vector<float> atributos;
-        for (int dimensao = 0; dimensao < _dados->dimensoes(); dimensao++)
+        if (_dados->dimensoes()==2)
         {
-            float atributo;
-            stream >> atributo;
-            atributos.push_back(atributo);
+            float ponto_x = _ui->ponto_x->text().toFloat();
+            float ponto_y = _ui->ponto_y->text().toFloat();
+            atributos.push_back(ponto_x);
+            atributos.push_back(ponto_y);
+        } else
+        {
+            string atributos_texto = _ui->novo_ponto->text().toStdString();
+            stringstream stream(atributos_texto, stringstream::in);
+            for (int dimensao = 0; dimensao < _dados->dimensoes(); dimensao++)
+            {
+                float atributo;
+                stream >> atributo;
+                atributos.push_back(atributo);
+            }
         }
-        ponto = new Ponto(atributos);
+
+        Ponto ponto(atributos);
+        int classe = _classificador->classificar(&ponto);
+        QColor cor_classe = PaletaDeCores::cores.at(classe);
+        _ui->classe_label->setText(QString::number(classe));
+
+        QPalette classe_palette;
+        classe_palette.setColor(QPalette::WindowText, cor_classe);
+        _ui->classe_label->setPalette(classe_palette);
     }
-
-    int vizinhos = _ui->numero_vizinhos->text().toFloat();
-
-    int classe = nn->classificar(ponto, distancia, vizinhos);
-    QColor cor_classe = PaletaDeCores::cores.at(classe);
-    _ui->classe_label->setText(QString::number(classe));
-
-    QPalette classe_palette;
-    classe_palette.setColor(QPalette::WindowText, cor_classe);
-    _ui->classe_label->setPalette(classe_palette);
-
-    delete nn;
 }
 
 void MainWindow::dados(ConjuntoDeDados *dados)
 {
+    if (_dados)
+    {
+        delete _dados;
+    }
+
     _dados = dados;
 }
 
 void MainWindow::carregarArquivo()
 {
     QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Abrir arquivo de dados"), "");
-    _dados = new ConjuntoDeDados(nome_arquivo.toStdString());
+    dados(new ConjuntoDeDados(nome_arquivo.toStdString()));
 
     _ui->graphicsView->limpar();
 }

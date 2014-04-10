@@ -9,6 +9,7 @@
 #include "geracaoespiral.h"
 #include "geracaoaleatorio.h"
 #include "espiralsimples.h"
+#include "classificador.h"
 #include "nearestneighbor.h"
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
@@ -35,6 +36,7 @@ public slots:
     void gerarAleatorio();
     void classificar();
     void carregarArquivo();
+    void definirClassificador();
 
 private:
     Ui::MainWindow * _ui;
@@ -43,6 +45,7 @@ private:
     GeracaoAleatorio * _aleatorio;
 
     ConjuntoDeDados * _dados;
+    Classificador * _classificador;
 
     Distancia * distancia();
 

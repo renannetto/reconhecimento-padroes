@@ -26,7 +26,9 @@ SOURCES += main.cpp\
     nearestneighbor.cpp \
     paletadecores.cpp \
     canvas.cpp \
-    espiraldupla.cpp
+    espiraldupla.cpp \
+    classificador.cpp \
+    ibl.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -41,7 +43,9 @@ HEADERS  += mainwindow.h \
     nearestneighbor.h \
     paletadecores.h \
     canvas.h \
-    espiraldupla.h
+    espiraldupla.h \
+    classificador.h \
+    ibl.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \

@@ -7,18 +7,20 @@ using namespace std;
 
 class Ponto
 {
-public:    
-    Ponto(vector<float> coordenadas, int classe = -1);
+public:
+    Ponto();
+    Ponto(vector<float> atributos, int classe = -1);
 
     int dimensoes();
     int classe();
 
     float at(int dimensao);
+    void at(int dimensao, float atributo);
     float x();
     float y();
 
 private:
-    vector<float> _coordenadas;
+    vector<float> _atributos;
     int _classe;
 };
 

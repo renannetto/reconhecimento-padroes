@@ -4,19 +4,19 @@
 #include <list>
 #include <limits>
 
-#include "ponto.h"
-#include "distancia.h"
+#include "classificador.h"
+#include "conjuntodedados.h"
 
-class NearestNeighbor
+class NearestNeighbor : public Classificador
 {
 public:
-    NearestNeighbor(vector<Ponto*> pontos, int classes);
+    NearestNeighbor(Distancia * distancia, ConjuntoDeDados * dados, int vizinhos);
 
-    int classificar(Ponto *ponto, Distancia * distancia, int vizinhos);
+    int classificar(Ponto * ponto);
 
 private:
-    vector<Ponto*> _pontos;
-    int _classes;
+    ConjuntoDeDados * _dados;
+    int _vizinhos;
 };
 
 #endif // NEARESTNEIGHBOR_H
