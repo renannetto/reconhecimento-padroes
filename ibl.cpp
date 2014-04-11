@@ -29,7 +29,7 @@ list<pair<float, int> > IBL::calcularDistancias(Ponto *ponto)
         {
             if (distancia < iterador_distancias->first)
             {
-                distancias.insert(iterador_distancias, pair<float, int>(distancia, _treino.at(indice_treino)->classe()));
+                distancias.insert(iterador_distancias, pair<float, int>(distancia, indice_treino));
                 break;
             }
         }
@@ -42,8 +42,8 @@ int IBL::classificar(Ponto *ponto)
 {
     list<pair<float, int> > distancias = calcularDistancias(ponto);
 
-    int classe = distancias.front().second;
-    return classe;
+    Ponto * melhor_ponto = _treino.at(distancias.front().second);
+    return melhor_ponto->classe();
 }
 
 const vector<Ponto*> IBL::treino()

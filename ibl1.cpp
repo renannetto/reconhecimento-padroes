@@ -8,7 +8,8 @@ void IBL1::treinar(Ponto * ponto)
 {
     list<pair<float, int> > distancias = calcularDistancias(ponto);
 
-    int ymax = distancias.front().second;
+    int indice_max = distancias.front().second;
+    int ymax = (indice_max == -1) ? -1 : _treino.at(indice_max)->classe();
     if (ymax==ponto->classe())
     {
         _corretas++;

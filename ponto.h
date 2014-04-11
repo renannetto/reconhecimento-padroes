@@ -22,6 +22,7 @@ public:
 private:
     vector<float> _atributos;
     int _classe;
+    pair<float> _intervalo_precisao;
 };
 
 #endif // PONTO_H

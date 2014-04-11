@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     classificador.cpp \
     ibl.cpp \
     ibl1.cpp \
-    ibl2.cpp
+    ibl2.cpp \
+    ibl3.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -49,7 +50,8 @@ HEADERS  += mainwindow.h \
     classificador.h \
     ibl.h \
     ibl1.h \
-    ibl2.h
+    ibl2.h \
+    ibl3.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \
