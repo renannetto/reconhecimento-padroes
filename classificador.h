@@ -9,11 +9,11 @@ friend class NearestNeighbor;
 
 public:
     Classificador(Distancia * distancia);
-    ~Classificador();
+    virtual ~Classificador();
 
     virtual int classificar(Ponto * ponto) = 0;
 
-private:
+protected:
     Distancia * _distancia;
 };
 

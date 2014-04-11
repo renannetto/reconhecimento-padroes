@@ -28,7 +28,9 @@ SOURCES += main.cpp\
     canvas.cpp \
     espiraldupla.cpp \
     classificador.cpp \
-    ibl.cpp
+    ibl.cpp \
+    ibl1.cpp \
+    ibl2.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -45,7 +47,9 @@ HEADERS  += mainwindow.h \
     canvas.h \
     espiraldupla.h \
     classificador.h \
-    ibl.h
+    ibl.h \
+    ibl1.h \
+    ibl2.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \

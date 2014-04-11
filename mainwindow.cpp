@@ -118,6 +118,16 @@ void MainWindow::definirClassificador()
         {
              int vizinhos = _ui->numero_vizinhos->text().toFloat();
              _classificador = new NearestNeighbor(distancia, _dados, vizinhos);
+        } else if (_ui->ibl1_radio->isChecked())
+        {
+            _classificador = new IBL1(distancia);
+            ((IBL*)_classificador)->treinar(_dados);
+            desenharPontos(((IBL*)_classificador)->treino());
+        } else if (_ui->ibl2_radio->isChecked())
+        {
+            _classificador = new IBL2(distancia);
+            ((IBL*)_classificador)->treinar(_dados);
+            desenharPontos(((IBL*)_classificador)->treino());
         }
     }
 }
@@ -146,6 +156,11 @@ void MainWindow::classificar()
         }
 
         Ponto ponto(atributos);
+        if (_dados->dimensoes()>2)
+        {
+            _dados->normalizarPonto(&ponto);
+        }
+
         int classe = _classificador->classificar(&ponto);
         QColor cor_classe = PaletaDeCores::cores.at(classe);
         _ui->classe_label->setText(QString::number(classe));

@@ -11,6 +11,7 @@ class Distancia
 {
 public:
     Distancia();
+    virtual ~Distancia();
 
     virtual float distancia(Ponto * ponto1, Ponto * ponto2) = 0;
 };

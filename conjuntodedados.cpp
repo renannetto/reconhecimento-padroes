@@ -38,6 +38,8 @@ ConjuntoDeDados::ConjuntoDeDados(string nome_arquivo)
         stream >> classe;
         _pontos.push_back(new Ponto(coordenadas, classe));
     }
+
+    normalizar();
 }
 
 void ConjuntoDeDados::normalizar()

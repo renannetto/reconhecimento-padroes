@@ -3,3 +3,7 @@
 Distancia::Distancia()
 {
 }
+
+Distancia::~Distancia()
+{
+}

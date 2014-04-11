@@ -6,11 +6,16 @@
 #include <QFileDialog>
 
 #include "paletadecores.h"
+
 #include "geracaoespiral.h"
 #include "geracaoaleatorio.h"
 #include "espiralsimples.h"
+
 #include "classificador.h"
 #include "nearestneighbor.h"
+#include "ibl1.h"
+#include "ibl2.h"
+
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
 #include "canvas.h"
