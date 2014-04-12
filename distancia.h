@@ -14,6 +14,7 @@ public:
     virtual ~Distancia();
 
     virtual float distancia(Ponto * ponto1, Ponto * ponto2) = 0;
+    virtual float distancia(Ponto *ponto1, Ponto *ponto2, vector<float> pesos) = 0;
 };
 
 #endif // DISTANCIA_H

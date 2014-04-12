@@ -15,6 +15,7 @@ public:
     void treinar(ConjuntoDeDados * dados);
     virtual void treinar(Ponto * ponto) = 0;
     list<pair<float, int> > calcularDistancias(Ponto * ponto);
+    virtual float calcularDistancia(Ponto * ponto1, Ponto * ponto2);
     int classificar(Ponto *ponto);
 
     const vector<Ponto*> treino();

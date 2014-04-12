@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     ibl.cpp \
     ibl1.cpp \
     ibl2.cpp \
-    ibl3.cpp
+    ibl3.cpp \
+    ibl4.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -51,7 +52,8 @@ HEADERS  += mainwindow.h \
     ibl.h \
     ibl1.h \
     ibl2.h \
-    ibl3.h
+    ibl3.h \
+    ibl4.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \

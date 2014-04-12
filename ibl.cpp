@@ -21,7 +21,7 @@ list<pair<float, int> > IBL::calcularDistancias(Ponto *ponto)
     for (size_t indice_treino = 0; indice_treino < _treino.size(); indice_treino++)
     {
         Ponto * ponto_treino = _treino.at(indice_treino);
-        float distancia = _distancia->distancia(ponto, ponto_treino);
+        float distancia = calcularDistancia(ponto, ponto_treino);
 
         list<pair<float, int> >::iterator iterador_distancias;
         list<pair<float, int> >::iterator end = distancias.end();
@@ -34,8 +34,13 @@ list<pair<float, int> > IBL::calcularDistancias(Ponto *ponto)
             }
         }
     }
-
+    distancias.pop_back();
     return distancias;
+}
+
+float IBL::calcularDistancia(Ponto *ponto1, Ponto *ponto2)
+{
+    return _distancia->distancia(ponto1, ponto2);
 }
 
 int IBL::classificar(Ponto *ponto)

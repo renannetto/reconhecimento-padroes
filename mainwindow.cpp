@@ -128,6 +128,16 @@ void MainWindow::definirClassificador()
             _classificador = new IBL2(distancia);
             ((IBL*)_classificador)->treinar(_dados);
             desenharPontos(((IBL*)_classificador)->treino());
+        } else if (_ui->ibl3_radio->isChecked())
+        {
+            _classificador = new IBL3(distancia, _dados->classes());
+            ((IBL*)_classificador)->treinar(_dados);
+            desenharPontos(((IBL*)_classificador)->treino());
+        } else if (_ui->ibl4_radio->isChecked())
+        {
+            _classificador = new IBL4(distancia, _dados->classes());
+            ((IBL*)_classificador)->treinar(_dados);
+            desenharPontos(((IBL*)_classificador)->treino());
         }
     }
 }

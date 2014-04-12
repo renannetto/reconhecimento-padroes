@@ -15,6 +15,8 @@
 #include "nearestneighbor.h"
 #include "ibl1.h"
 #include "ibl2.h"
+#include "ibl3.h"
+#include "ibl4.h"
 
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
