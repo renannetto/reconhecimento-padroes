@@ -2,6 +2,8 @@
 
 IBL::IBL(Distancia * distancia) : Classificador(distancia)
 {
+    _corretas = 0;
+    _incorretas = 0;
 }
 
 void IBL::treinar(ConjuntoDeDados *dados)
@@ -54,4 +56,14 @@ int IBL::classificar(Ponto *ponto)
 const vector<Ponto*> IBL::treino()
 {
     return _treino;
+}
+
+int IBL::corretas()
+{
+    return _corretas;
+}
+
+int IBL::incorretas()
+{
+    return _incorretas;
 }

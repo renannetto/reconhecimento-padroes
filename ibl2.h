@@ -8,7 +8,7 @@ class IBL2 : public IBL
 public:
     IBL2(Distancia * distancia);
 
-    void treinar(Ponto *ponto);
+    Ponto * treinar(Ponto *ponto);
 };
 
 #endif // IBL2_H

@@ -9,7 +9,7 @@ public:
     DistanciaHamming();
 
     float distancia(Ponto *ponto1, Ponto *ponto2);
-    float distancia(Ponto *ponto1, Ponto *ponto2, vector<float> pesos);
+    float distancia(Ponto *ponto1, Ponto *ponto2, vector<float> pesos, bool ausente = false);
 };
 
 #endif // DISTANCIAHAMMING_H

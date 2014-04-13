@@ -2,8 +2,7 @@
 
 Canvas::Canvas(QWidget *parent) : QGraphicsView(parent)
 {
-    _viewport = new QGraphicsScene(this);;
-    _viewport->setSceneRect(-320, -240, 640, 480);
+    _viewport = new QGraphicsScene(-320, -240, 640, 480, this);
     setScene(_viewport);
 }
 

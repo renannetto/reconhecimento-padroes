@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QFileDialog>
+#include <QMessageBox>
+
+#include <exception>
 
 #include "paletadecores.h"
 
@@ -17,6 +20,7 @@
 #include "ibl2.h"
 #include "ibl3.h"
 #include "ibl4.h"
+#include "ibl5.h"
 
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"

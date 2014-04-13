@@ -4,7 +4,7 @@ IBL2::IBL2(Distancia * distancia) : IBL(distancia)
 {
 }
 
-void IBL2::treinar(Ponto *ponto)
+Ponto * IBL2::treinar(Ponto *ponto)
 {
     list<pair<float, int> > distancias = calcularDistancias(ponto);
 
@@ -20,8 +20,12 @@ void IBL2::treinar(Ponto *ponto)
             _incorretas++;
             _treino.push_back(ponto);
         }
+
+        return _treino.at(indice_max);
     } else
     {
+        _incorretas++;
         _treino.push_back(ponto);
+        return 0;
     }
 }

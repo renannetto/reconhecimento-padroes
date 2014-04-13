@@ -123,22 +123,57 @@ void MainWindow::definirClassificador()
             _classificador = new IBL1(distancia);
             ((IBL*)_classificador)->treinar(_dados);
             desenharPontos(((IBL*)_classificador)->treino());
+
+            int corretas = ((IBL*)_classificador)->corretas();
+            int incorretas = ((IBL*)_classificador)->incorretas();
+            _ui->corretas->setText(QString::number(corretas));
+            _ui->incorretas->setText(QString::number(incorretas));
         } else if (_ui->ibl2_radio->isChecked())
         {
             _classificador = new IBL2(distancia);
             ((IBL*)_classificador)->treinar(_dados);
             desenharPontos(((IBL*)_classificador)->treino());
+
+            int corretas = ((IBL*)_classificador)->corretas();
+            int incorretas = ((IBL*)_classificador)->incorretas();
+            _ui->corretas->setText(QString::number(corretas));
+            _ui->incorretas->setText(QString::number(incorretas));
         } else if (_ui->ibl3_radio->isChecked())
         {
             _classificador = new IBL3(distancia, _dados->classes());
             ((IBL*)_classificador)->treinar(_dados);
             desenharPontos(((IBL*)_classificador)->treino());
+
+            int corretas = ((IBL*)_classificador)->corretas();
+            int incorretas = ((IBL*)_classificador)->incorretas();
+            _ui->corretas->setText(QString::number(corretas));
+            _ui->incorretas->setText(QString::number(incorretas));
         } else if (_ui->ibl4_radio->isChecked())
         {
-            _classificador = new IBL4(distancia, _dados->classes());
+            _classificador = new IBL4(distancia, _dados->classes(), _dados->dimensoes());
             ((IBL*)_classificador)->treinar(_dados);
             desenharPontos(((IBL*)_classificador)->treino());
+
+            int corretas = ((IBL*)_classificador)->corretas();
+            int incorretas = ((IBL*)_classificador)->incorretas();
+            _ui->corretas->setText(QString::number(corretas));
+            _ui->incorretas->setText(QString::number(incorretas));
+        } else if (_ui->ibl5_radio->isChecked())
+        {
+            _classificador = new IBL5(distancia, _dados->classes(), _dados->dimensoes());
+            ((IBL*)_classificador)->treinar(_dados);
+            desenharPontos(((IBL*)_classificador)->treino());
+
+            int corretas = ((IBL*)_classificador)->corretas();
+            int incorretas = ((IBL*)_classificador)->incorretas();
+            _ui->corretas->setText(QString::number(corretas));
+            _ui->incorretas->setText(QString::number(incorretas));
         }
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
     }
 }
 
@@ -178,6 +213,11 @@ void MainWindow::classificar()
         QPalette classe_palette;
         classe_palette.setColor(QPalette::WindowText, cor_classe);
         _ui->classe_label->setPalette(classe_palette);
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário definir um classificador primeiro!");
+        message_box.exec();
     }
 }
 
@@ -194,7 +234,14 @@ void MainWindow::dados(ConjuntoDeDados *dados)
 void MainWindow::carregarArquivo()
 {
     QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Abrir arquivo de dados"), "");
-    dados(new ConjuntoDeDados(nome_arquivo.toStdString()));
 
-    _ui->graphicsView->limpar();
+    try {
+        dados(new ConjuntoDeDados(nome_arquivo.toStdString()));
+        _ui->graphicsView->limpar();
+    } catch (exception &e)
+    {
+        QMessageBox message_box;
+        message_box.setText("Não foi possível carregar a base de dados selecionada");
+        message_box.exec();
+    }
 }

@@ -19,9 +19,19 @@ public:
     float x();
     float y();
 
+    void usada();
+    void correta();
+
+    int contador();
+    int corretas();
+
+    bool ambosConhecidos(Ponto * ponto2, int dimensao);
+
 private:
     vector<float> _atributos;
     int _classe;
+    int _contador;
+    int _corretas;
 };
 
 #endif // PONTO_H
