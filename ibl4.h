@@ -1,7 +1,11 @@
 #ifndef IBL4_H
 #define IBL4_H
 
+#include <cmath>
+
 #include "ibl3.h"
+
+#include <iostream>
 
 class IBL4 : public IBL3
 {

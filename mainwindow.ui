@@ -43,7 +43,7 @@
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>60</x>
         <y>490</y>
         <width>201</width>
         <height>61</height>
@@ -109,6 +109,53 @@
         <string>0</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>520</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Testar todos os pontos</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>490</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>DIstância entre pontos: </string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="distancia_pontos">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>490</y>
+        <width>47</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>10</number>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -559,11 +606,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>812</x>
-     <y>269</y>
+     <y>307</y>
     </hint>
     <hint type="destinationlabel">
      <x>892</x>
      <y>417</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>testarPontos()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>518</x>
+     <y>592</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>685</x>
+     <y>607</y>
     </hint>
    </hints>
   </connection>
@@ -575,5 +638,6 @@
   <slot>definirDistancia()</slot>
   <slot>gerarAleatorio()</slot>
   <slot>carregarArquivo()</slot>
+  <slot>testarPontos()</slot>
  </slots>
 </ui>

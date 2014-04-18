@@ -122,7 +122,10 @@ void MainWindow::definirClassificador()
         {
             _classificador = new IBL1(distancia);
             ((IBL*)_classificador)->treinar(_dados);
-            desenharPontos(((IBL*)_classificador)->treino());
+            if (_dados->dimensoes()==2)
+            {
+                desenharPontos(((IBL*)_classificador)->treino());
+            }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
@@ -132,7 +135,10 @@ void MainWindow::definirClassificador()
         {
             _classificador = new IBL2(distancia);
             ((IBL*)_classificador)->treinar(_dados);
-            desenharPontos(((IBL*)_classificador)->treino());
+            if (_dados->dimensoes()==2)
+            {
+                desenharPontos(((IBL*)_classificador)->treino());
+            }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
@@ -142,7 +148,10 @@ void MainWindow::definirClassificador()
         {
             _classificador = new IBL3(distancia, _dados->classes());
             ((IBL*)_classificador)->treinar(_dados);
-            desenharPontos(((IBL*)_classificador)->treino());
+            if (_dados->dimensoes()==2)
+            {
+                desenharPontos(((IBL*)_classificador)->treino());
+            }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
@@ -152,7 +161,10 @@ void MainWindow::definirClassificador()
         {
             _classificador = new IBL4(distancia, _dados->classes(), _dados->dimensoes());
             ((IBL*)_classificador)->treinar(_dados);
-            desenharPontos(((IBL*)_classificador)->treino());
+            if (_dados->dimensoes()==2)
+            {
+                desenharPontos(((IBL*)_classificador)->treino());
+            }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
@@ -162,7 +174,10 @@ void MainWindow::definirClassificador()
         {
             _classificador = new IBL5(distancia, _dados->classes(), _dados->dimensoes());
             ((IBL*)_classificador)->treinar(_dados);
-            desenharPontos(((IBL*)_classificador)->treino());
+            if (_dados->dimensoes()==2)
+            {
+                desenharPontos(((IBL*)_classificador)->treino());
+            }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
@@ -173,6 +188,38 @@ void MainWindow::definirClassificador()
     {
         QMessageBox message_box;
         message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
+}
+
+void MainWindow::testarPontos()
+{
+    if (_dados && _dados->dimensoes() == 2 && _classificador)
+    {
+        int distancia_pontos = _ui->distancia_pontos->value();
+        int width = _ui->graphicsView->width();
+        int height = _ui->graphicsView->height();
+        for (int x = -width/2; x < width/2; x += distancia_pontos)
+        {
+            for (int y = -height/2; y < height/2; y += distancia_pontos)
+            {
+                vector<float> atributos;
+                atributos.push_back(x);
+                atributos.push_back(y);
+
+                Ponto ponto(atributos);
+                int classe = _classificador->classificar(&ponto);
+                _ui->graphicsView->desenharPonto(Ponto(atributos, classe));
+            }
+        }
+    } else if (!_dados || _dados->dimensoes() > 2)
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados 2D!");
+        message_box.exec();
+    } else {
+        QMessageBox message_box;
+        message_box.setText("É necessário definir um classificador primeiro!");
         message_box.exec();
     }
 }

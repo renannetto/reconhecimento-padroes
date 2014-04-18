@@ -48,6 +48,7 @@ public slots:
     void classificar();
     void carregarArquivo();
     void definirClassificador();
+    void testarPontos();
 
 private:
     Ui::MainWindow * _ui;

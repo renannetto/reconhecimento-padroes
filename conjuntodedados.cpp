@@ -53,13 +53,16 @@ void ConjuntoDeDados::normalizar()
         for (int dimensao = 0; dimensao < ponto->dimensoes(); dimensao++)
         {
             float atributo = ponto->at(dimensao);
-            if (atributo < _ponto_min.at(dimensao))
+            if (atributo != -1)
             {
-                _ponto_min.at(dimensao, atributo);
-            }
-            if (atributo > _ponto_max.at(dimensao))
-            {
-                _ponto_max.at(dimensao, atributo);
+                if (atributo < _ponto_min.at(dimensao) || _ponto_min.at(dimensao)==-1)
+                {
+                    _ponto_min.at(dimensao, atributo);
+                }
+                if (atributo > _ponto_max.at(dimensao) || _ponto_max.at(dimensao)==-1)
+                {
+                    _ponto_max.at(dimensao, atributo);
+                }
             }
         }
     }
@@ -74,10 +77,13 @@ void ConjuntoDeDados::normalizarPonto(Ponto *ponto)
 {
     for (int dimensao = 0; dimensao < ponto->dimensoes(); dimensao++)
     {
-        float min = _ponto_min.at(dimensao);
-        float max = _ponto_max.at(dimensao);
-        float atributo = ponto->at(dimensao);
-        ponto->at(dimensao, (atributo-min)/max);
+        if (ponto->at(dimensao) != -1)
+        {
+            float min = _ponto_min.at(dimensao);
+            float max = _ponto_max.at(dimensao);
+            float atributo = ponto->at(dimensao);
+            ponto->at(dimensao, (atributo-min)/max);
+        }
     }
 }
 

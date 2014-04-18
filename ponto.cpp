@@ -67,5 +67,5 @@ int Ponto::corretas()
 
 bool Ponto::ambosConhecidos(Ponto *ponto2, int dimensao)
 {
-    return true;
+    return this->_atributos.at(dimensao) != -1 && ponto2->_atributos.at(dimensao) != -1;
 }
