@@ -1,6 +1,8 @@
 #ifndef DISTANCIAEUCLIDES_H
 #define DISTANCIAEUCLIDES_H
 
+#include <iostream>
+
 #include "distancia.h"
 
 class DistanciaEuclides : public Distancia

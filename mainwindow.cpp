@@ -197,9 +197,12 @@ void MainWindow::testarPontos()
                 atributos.push_back(x);
                 atributos.push_back(y);
 
-                Ponto ponto(atributos);
-                int classe = _classificador->classificar(&ponto);
-                _ui->graphicsView->desenharPonto(Ponto(atributos, classe));
+                Ponto * ponto = new Ponto(atributos);
+                int classe = _classificador->classificar(ponto);
+                delete ponto;
+                ponto = new Ponto(atributos, classe);
+                _ui->graphicsView->desenharPonto(*ponto);
+                delete ponto;
             }
         }
     } else if (!_dados || _dados->dimensoes() > 2)
