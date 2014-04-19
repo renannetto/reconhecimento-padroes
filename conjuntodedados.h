@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 
     void normalizar();
     void normalizarPonto(Ponto * ponto);
+    void adicionarRuido(int incidencia, int ruido);
 
     int classes();
     const vector<Ponto*> pontos();

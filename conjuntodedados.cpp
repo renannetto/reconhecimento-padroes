@@ -87,6 +87,24 @@ void ConjuntoDeDados::normalizarPonto(Ponto *ponto)
     }
 }
 
+void ConjuntoDeDados::adicionarRuido(int incidencia, int ruido)
+{
+    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
+    {
+        int chance_rudio = rand() % 100;
+        if (chance_rudio < incidencia)
+        {
+            Ponto * ponto = _pontos.at(indice_ponto);
+            for (int dimensao = 0; dimensao < ponto->dimensoes(); dimensao++)
+            {
+                float atributo = ponto->at(dimensao);
+                int ruido_dimensao = rand()%(2*ruido) - ruido;
+                ponto->at(dimensao, atributo+ruido_dimensao);
+            }
+        }
+    }
+}
+
 int ConjuntoDeDados::classes()
 {
     return _classes;

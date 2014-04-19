@@ -496,6 +496,7 @@
     <addaction name="carregar_arquivo"/>
     <addaction name="gerar_espiral"/>
     <addaction name="gerar_aleatorio"/>
+    <addaction name="adicionar_ruido"/>
    </widget>
    <addaction name="entrada_menu"/>
   </widget>
@@ -521,6 +522,11 @@
   <action name="gerar_aleatorio">
    <property name="text">
     <string>Gerar dados aleatórios</string>
+   </property>
+  </action>
+  <action name="adicionar_ruido">
+   <property name="text">
+    <string>Adicionar ruído</string>
    </property>
   </action>
  </widget>
@@ -630,6 +636,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>adicionar_ruido</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>adicionarRuido()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>467</x>
+     <y>331</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>gerarEspiral()</slot>
@@ -639,5 +661,6 @@
   <slot>gerarAleatorio()</slot>
   <slot>carregarArquivo()</slot>
   <slot>testarPontos()</slot>
+  <slot>adicionarRuido()</slot>
  </slots>
 </ui>

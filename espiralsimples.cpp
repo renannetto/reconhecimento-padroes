@@ -11,8 +11,8 @@ EspiralSimples::EspiralSimples(int numero_pontos, float a, float b, float passo,
         float ponto_y = raio*sin(theta);
         if (ruido > 0)
         {
-            ponto_x += rand()%(2*ruido) + ruido;
-            ponto_y += rand()%(2*ruido) + ruido;
+            ponto_x += rand()%(2*ruido) - ruido;
+            ponto_y += rand()%(2*ruido) - ruido;
         }
         vector<float> coordenadas;
         coordenadas.push_back(ponto_x);

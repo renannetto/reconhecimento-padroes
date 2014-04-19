@@ -12,8 +12,9 @@
 
 #include "geracaoespiral.h"
 #include "geracaoaleatorio.h"
-#include "espiralsimples.h"
+#include "adicionarruido.h"
 
+#include "espiralsimples.h"
 #include "classificador.h"
 #include "nearestneighbor.h"
 #include "ibl1.h"
@@ -41,10 +42,12 @@ public:
     void mousePressEvent(float x, float y);
     void desenharPontos(vector<Ponto*> ponto);
     void dados(ConjuntoDeDados * dados);
+    void adicionarRuido(int incidencia, int ruido);
 
 public slots:
     void gerarEspiral();
     void gerarAleatorio();
+    void adicionarRuido();
     void classificar();
     void carregarArquivo();
     void definirClassificador();
@@ -55,14 +58,12 @@ private:
 
     GeracaoEspiral * _espirais;
     GeracaoAleatorio * _aleatorio;
+    AdicionarRuido * _ruido;
 
     ConjuntoDeDados * _dados;
     Classificador * _classificador;
 
     Distancia * distancia();
-
-    Ponto transformar(Ponto ponto);
-    Ponto transformarInversa(Ponto ponto);
 };
 
 #endif // MAINWINDOW_H

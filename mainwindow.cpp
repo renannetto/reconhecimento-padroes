@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _aleatorio = new GeracaoAleatorio(this, largura, altura);
     _aleatorio->setVisible(false);
 
+    _ruido = new AdicionarRuido(this);
+    _ruido->setVisible(false);
+
     _ui->graphicsView->fixarMainWindow(this);
 
     PaletaDeCores::criarPaleta();
@@ -32,32 +35,6 @@ MainWindow::~MainWindow()
     delete _ui;
 
     delete _espirais;
-}
-
-Ponto MainWindow::transformar(Ponto ponto)
-{
-    int largura = _ui->graphicsView->width();
-    int altura = _ui->graphicsView->height();
-
-    float novo_ponto_x = ponto.x() + (largura/2);
-    float novo_ponto_y = (altura/2)-ponto.y();
-    vector<float> coordenadas;
-    coordenadas.push_back(novo_ponto_x);
-    coordenadas.push_back(novo_ponto_y);
-    return Ponto(coordenadas, ponto.classe());
-}
-
-Ponto MainWindow::transformarInversa(Ponto ponto)
-{
-    int largura = _ui->graphicsView->width();
-    int altura = _ui->graphicsView->height();
-
-    float novo_ponto_x = ponto.x()-(largura/2);
-    float novo_ponto_y = (altura/2)-ponto.y();
-    vector<float> coordenadas;
-    coordenadas.push_back(novo_ponto_x);
-    coordenadas.push_back(novo_ponto_y);
-    return Ponto(coordenadas, ponto.classe());
 }
 
 void MainWindow::mousePressEvent(float x, float y)
@@ -84,6 +61,19 @@ void MainWindow::gerarEspiral()
 void MainWindow::gerarAleatorio()
 {
     _aleatorio->setVisible(true);
+}
+
+void MainWindow::adicionarRuido()
+{
+    if (_dados)
+    {
+        _ruido->setVisible(true);
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
 }
 
 void MainWindow::desenharPontos(vector<Ponto*> pontos)
@@ -276,6 +266,20 @@ void MainWindow::dados(ConjuntoDeDados *dados)
     }
 
     _dados = dados;
+}
+
+void MainWindow::adicionarRuido(int incidencia, int ruido)
+{
+    if (_dados)
+    {
+        _dados->adicionarRuido(incidencia, ruido);
+        desenharPontos(_dados->pontos());
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
 }
 
 void MainWindow::carregarArquivo()
