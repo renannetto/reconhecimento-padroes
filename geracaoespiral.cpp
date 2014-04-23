@@ -28,12 +28,10 @@ void GeracaoEspiral::gerarEspiral()
     if (_ui->espiral_simples_radio->isChecked())
     {
         EspiralSimples * espiral = new EspiralSimples(numero_pontos, a, b, passo, ruido);
-        _main_window->desenharPontos(espiral->pontos());
         _main_window->dados(espiral);
     } else
     {
         EspiralDupla * espiral = new EspiralDupla(numero_pontos, a, b, passo, ruido);
-        _main_window->desenharPontos(espiral->pontos());
         _main_window->dados(espiral);
     }
 

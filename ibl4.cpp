@@ -44,3 +44,8 @@ Ponto * IBL4::treinar(Ponto *ponto)
 
     return ponto_max;
 }
+
+const vector<float> IBL4::pesos()
+{
+    return _pesos;
+}

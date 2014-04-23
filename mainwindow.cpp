@@ -14,15 +14,17 @@ MainWindow::MainWindow(QWidget *parent) :
     _espirais = new GeracaoEspiral(this);
     _espirais->setVisible(false);
 
-    int largura = _ui->graphicsView->width();
-    int altura = _ui->graphicsView->height();
+    int largura = _ui->view_dados->width();
+    int altura = _ui->view_dados->height();
     _aleatorio = new GeracaoAleatorio(this, largura, altura);
     _aleatorio->setVisible(false);
 
     _ruido = new AdicionarRuido(this);
     _ruido->setVisible(false);
 
-    _ui->graphicsView->fixarMainWindow(this);
+    _ui->view_dados->fixarMainWindow(this);
+    _ui->view_treino->fixarMainWindow(this);
+    _ui->view_teste->fixarMainWindow(this);
 
     PaletaDeCores::criarPaleta();
 
@@ -44,8 +46,8 @@ void MainWindow::mousePressEvent(float x, float y)
     coordenadas.push_back(y);
     Ponto ponto(coordenadas);
 
-    int largura = _ui->graphicsView->width();
-    int altura = _ui->graphicsView->height();
+    int largura = _ui->view_dados->width();
+    int altura = _ui->view_dados->height();
     if (ponto.x() > -largura/2 && ponto.x() < largura/2 && ponto.y() > -altura/2 && ponto.y() < altura/2)
     {
         _ui->ponto_x->setText(QString::number(ponto.x()));
@@ -73,15 +75,6 @@ void MainWindow::adicionarRuido()
         QMessageBox message_box;
         message_box.setText("É necessário carregar um conjunto de dados primeiro!");
         message_box.exec();
-    }
-}
-
-void MainWindow::desenharPontos(vector<Ponto*> pontos)
-{
-    _ui->graphicsView->limpar();
-    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
-    {
-        _ui->graphicsView->desenharPonto(*pontos.at(indice_ponto));
     }
 }
 
@@ -114,7 +107,7 @@ void MainWindow::definirClassificador()
             ((IBL*)_classificador)->treinar(_dados);
             if (_dados->dimensoes()==2)
             {
-                desenharPontos(((IBL*)_classificador)->treino());
+                _ui->view_treino->desenharPontos(((IBL*)_classificador)->treino());
             }
 
             int corretas = ((IBL*)_classificador)->corretas();
@@ -127,7 +120,7 @@ void MainWindow::definirClassificador()
             ((IBL*)_classificador)->treinar(_dados);
             if (_dados->dimensoes()==2)
             {
-                desenharPontos(((IBL*)_classificador)->treino());
+                _ui->view_treino->desenharPontos(((IBL*)_classificador)->treino());
             }
 
             int corretas = ((IBL*)_classificador)->corretas();
@@ -140,7 +133,7 @@ void MainWindow::definirClassificador()
             ((IBL*)_classificador)->treinar(_dados);
             if (_dados->dimensoes()==2)
             {
-                desenharPontos(((IBL*)_classificador)->treino());
+                _ui->view_treino->desenharPontos(((IBL*)_classificador)->treino());
             }
 
             int corretas = ((IBL*)_classificador)->corretas();
@@ -153,26 +146,30 @@ void MainWindow::definirClassificador()
             ((IBL*)_classificador)->treinar(_dados);
             if (_dados->dimensoes()==2)
             {
-                desenharPontos(((IBL*)_classificador)->treino());
+                _ui->view_treino->desenharPontos(((IBL*)_classificador)->treino());
             }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
             _ui->corretas->setText(QString::number(corretas));
             _ui->incorretas->setText(QString::number(incorretas));
+
+            mostrarPesos(((IBL4*)_classificador)->pesos());
         } else if (_ui->ibl5_radio->isChecked())
         {
             _classificador = new IBL5(distancia, _dados->classes(), _dados->dimensoes());
             ((IBL*)_classificador)->treinar(_dados);
             if (_dados->dimensoes()==2)
             {
-                desenharPontos(((IBL*)_classificador)->treino());
+                _ui->view_treino->desenharPontos(((IBL*)_classificador)->treino());
             }
 
             int corretas = ((IBL*)_classificador)->corretas();
             int incorretas = ((IBL*)_classificador)->incorretas();
             _ui->corretas->setText(QString::number(corretas));
             _ui->incorretas->setText(QString::number(incorretas));
+
+            mostrarPesos(((IBL4*)_classificador)->pesos());
         }
     } else
     {
@@ -182,13 +179,24 @@ void MainWindow::definirClassificador()
     }
 }
 
+void MainWindow::mostrarPesos(vector<float> pesos)
+{
+    ostringstream stream_pesos;
+    for (size_t dimensao = 0; dimensao < pesos.size(); dimensao++)
+    {
+        float peso = pesos.at(dimensao);
+        stream_pesos << peso << " ";
+    }
+    _ui->pesos->setText(QString::fromStdString(stream_pesos.str()));
+}
+
 void MainWindow::testarPontos()
 {
     if (_dados && _dados->dimensoes() == 2 && _classificador)
     {
         int distancia_pontos = _ui->distancia_pontos->value();
-        int width = _ui->graphicsView->width();
-        int height = _ui->graphicsView->height();
+        int width = _ui->view_teste->width();
+        int height = _ui->view_teste->height();
         for (int x = -width/2; x < width/2; x += distancia_pontos)
         {
             for (int y = -height/2; y < height/2; y += distancia_pontos)
@@ -201,7 +209,7 @@ void MainWindow::testarPontos()
                 int classe = _classificador->classificar(ponto);
                 delete ponto;
                 ponto = new Ponto(atributos, classe);
-                _ui->graphicsView->desenharPonto(*ponto);
+                _ui->view_teste->desenharPonto(*ponto);
                 delete ponto;
             }
         }
@@ -269,6 +277,7 @@ void MainWindow::dados(ConjuntoDeDados *dados)
     }
 
     _dados = dados;
+    _ui->view_dados->desenharPontos(dados->pontos());
 }
 
 void MainWindow::adicionarRuido(int incidencia, int ruido)
@@ -276,7 +285,7 @@ void MainWindow::adicionarRuido(int incidencia, int ruido)
     if (_dados)
     {
         _dados->adicionarRuido(incidencia, ruido);
-        desenharPontos(_dados->pontos());
+        _ui->view_dados->desenharPontos(_dados->pontos());
     } else
     {
         QMessageBox message_box;
@@ -291,7 +300,9 @@ void MainWindow::carregarArquivo()
 
     try {
         dados(new ConjuntoDeDados(nome_arquivo.toStdString()));
-        _ui->graphicsView->limpar();
+        _ui->view_dados->limpar();
+        _ui->view_treino->limpar();
+        _ui->view_teste->limpar();
     } catch (exception &e)
     {
         QMessageBox message_box;

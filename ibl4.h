@@ -16,6 +16,9 @@ public:
     float calcularDistancia(Ponto *ponto1, Ponto *ponto2);
 
     virtual void atualizarPeso(Ponto* ponto_max, int dimensao, Ponto *ponto);
+
+    const vector<float> pesos();
+
 private:
     vector<float> _pesos_acumulados;
     vector<float> _pesos_normalizados;

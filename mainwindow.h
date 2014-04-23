@@ -40,9 +40,9 @@ public:
     ~MainWindow();
 
     void mousePressEvent(float x, float y);
-    void desenharPontos(vector<Ponto*> ponto);
     void dados(ConjuntoDeDados * dados);
     void adicionarRuido(int incidencia, int ruido);
+    void mostrarPesos(vector<float> pesos);
 
 public slots:
     void gerarEspiral();

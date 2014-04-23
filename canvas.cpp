@@ -2,7 +2,7 @@
 
 Canvas::Canvas(QWidget *parent) : QGraphicsView(parent)
 {
-    _viewport = new QGraphicsScene(-320, -240, 640, 480, this);
+    _viewport = new QGraphicsScene(this);
     setScene(_viewport);
 }
 
@@ -15,6 +15,15 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 void Canvas::fixarMainWindow(MainWindow * main_window)
 {
     _main_window = main_window;
+}
+
+void Canvas::desenharPontos(vector<Ponto *> pontos)
+{
+    limpar();
+    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
+    {
+        desenharPonto(*pontos.at(indice_ponto));
+    }
 }
 
 void Canvas::desenharPonto(Ponto ponto)

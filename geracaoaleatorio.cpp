@@ -30,6 +30,5 @@ void GeracaoAleatorio::gerarConjunto()
     ConjuntoAleatorio * dados = new ConjuntoAleatorio(classes, numero_pontos, min_x, min_y, max_x, max_y);
     _main_window->dados(dados);
 
-    _main_window->desenharPontos(dados->pontos());
     setVisible(false);
 }

@@ -18,6 +18,7 @@ class Canvas : public QGraphicsView
 public:
     explicit Canvas(QWidget *parent = 0);
     void fixarMainWindow(MainWindow * main_window);
+    void desenharPontos(vector<Ponto*> pontos);
     void desenharPonto(Ponto ponto);
     void limpar();
 
