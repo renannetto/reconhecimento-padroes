@@ -192,6 +192,7 @@ void MainWindow::mostrarPesos(vector<float> pesos)
 
 void MainWindow::testarPontos()
 {
+    _ui->view_teste->limpar();
     if (_dados && _dados->dimensoes() == 2 && _classificador)
     {
         int distancia_pontos = _ui->distancia_pontos->value();
@@ -277,7 +278,10 @@ void MainWindow::dados(ConjuntoDeDados *dados)
     }
 
     _dados = dados;
-    _ui->view_dados->desenharPontos(dados->pontos());
+    if (_dados->dimensoes()==2)
+    {
+        _ui->view_dados->desenharPontos(dados->pontos());
+    }
 }
 
 void MainWindow::adicionarRuido(int incidencia, int ruido)
@@ -299,10 +303,11 @@ void MainWindow::carregarArquivo()
     QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Abrir arquivo de dados"), "");
 
     try {
-        dados(new ConjuntoDeDados(nome_arquivo.toStdString()));
         _ui->view_dados->limpar();
         _ui->view_treino->limpar();
         _ui->view_teste->limpar();
+
+        dados(new ConjuntoDeDados(nome_arquivo.toStdString()));
     } catch (exception &e)
     {
         QMessageBox message_box;

@@ -39,7 +39,10 @@ ConjuntoDeDados::ConjuntoDeDados(string nome_arquivo)
         _pontos.push_back(new Ponto(coordenadas, classe));
     }
 
-    normalizar();
+    if (dimensoes()>2)
+    {
+        normalizar();
+    }
 }
 
 void ConjuntoDeDados::normalizar()
