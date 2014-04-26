@@ -108,6 +108,20 @@ void ConjuntoDeDados::adicionarRuido(int incidencia, int ruido)
     }
 }
 
+void ConjuntoDeDados::removerAtributos(int probabilidade)
+{
+    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
+    {
+        int chance_remocao = rand() % 100;
+        if (chance_remocao < probabilidade)
+        {
+            Ponto * ponto = _pontos.at(indice_ponto);
+            int dimensao = rand() % ponto->dimensoes();
+            ponto->at(dimensao, -1);
+        }
+    }
+}
+
 int ConjuntoDeDados::classes()
 {
     return _classes;

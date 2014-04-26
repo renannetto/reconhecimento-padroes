@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     _ruido = new AdicionarRuido(this);
     _ruido->setVisible(false);
 
+    _remover = new RemoverAtributos(this);
+    _remover->setVisible(false);
+
     _ui->view_dados->fixarMainWindow(this);
     _ui->view_treino->fixarMainWindow(this);
     _ui->view_teste->fixarMainWindow(this);
@@ -37,6 +40,9 @@ MainWindow::~MainWindow()
     delete _ui;
 
     delete _espirais;
+    delete _aleatorio;
+    delete _ruido;
+    delete _remover;
 }
 
 void MainWindow::mousePressEvent(float x, float y)
@@ -70,6 +76,19 @@ void MainWindow::adicionarRuido()
     if (_dados)
     {
         _ruido->setVisible(true);
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
+}
+
+void MainWindow::removerAtributos()
+{
+    if (_dados)
+    {
+        _remover->setVisible(true);
     } else
     {
         QMessageBox message_box;
@@ -290,6 +309,19 @@ void MainWindow::adicionarRuido(int incidencia, int ruido)
     {
         _dados->adicionarRuido(incidencia, ruido);
         _ui->view_dados->desenharPontos(_dados->pontos());
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
+}
+
+void MainWindow::removerAtributos(int probabilidade)
+{
+    if (_dados)
+    {
+        _dados->removerAtributos(probabilidade);
     } else
     {
         QMessageBox message_box;

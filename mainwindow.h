@@ -13,6 +13,7 @@
 #include "geracaoespiral.h"
 #include "geracaoaleatorio.h"
 #include "adicionarruido.h"
+#include "removeratributos.h"
 
 #include "espiralsimples.h"
 #include "classificador.h"
@@ -42,12 +43,14 @@ public:
     void mousePressEvent(float x, float y);
     void dados(ConjuntoDeDados * dados);
     void adicionarRuido(int incidencia, int ruido);
+    void removerAtributos(int probabilidade);
     void mostrarPesos(vector<float> pesos);
 
 public slots:
     void gerarEspiral();
     void gerarAleatorio();
     void adicionarRuido();
+    void removerAtributos();
     void classificar();
     void carregarArquivo();
     void definirClassificador();
@@ -59,6 +62,7 @@ private:
     GeracaoEspiral * _espirais;
     GeracaoAleatorio * _aleatorio;
     AdicionarRuido * _ruido;
+    RemoverAtributos * _remover;
 
     ConjuntoDeDados * _dados;
     Classificador * _classificador;

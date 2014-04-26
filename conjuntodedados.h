@@ -21,6 +21,7 @@ public:
     void normalizar();
     void normalizarPonto(Ponto * ponto);
     void adicionarRuido(int incidencia, int ruido);
+    void removerAtributos(int probabilidade);
 
     int classes();
     const vector<Ponto*> pontos();

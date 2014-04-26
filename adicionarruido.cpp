@@ -23,4 +23,6 @@ void AdicionarRuido::adicionarRuido()
     int ruido = _ui->ruido->value();
 
     _main_window->adicionarRuido(incidencia, ruido);
+
+    setVisible(false);
 }

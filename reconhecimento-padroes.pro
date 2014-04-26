@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     ibl3.cpp \
     ibl4.cpp \
     ibl5.cpp \
-    adicionarruido.cpp
+    adicionarruido.cpp \
+    removeratributos.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -57,9 +58,11 @@ HEADERS  += mainwindow.h \
     ibl3.h \
     ibl4.h \
     ibl5.h \
-    adicionarruido.h
+    adicionarruido.h \
+    removeratributos.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \
     geracaoaleatorio.ui \
-    adicionarruido.ui
+    adicionarruido.ui \
+    removeratributos.ui
