@@ -25,6 +25,11 @@ int Ponto::classe()
     return _classe;
 }
 
+void Ponto::classe(int classe)
+{
+    _classe = classe;
+}
+
 float Ponto::at(int dimensao)
 {
     return _atributos.at(dimensao);
@@ -68,4 +73,12 @@ int Ponto::corretas()
 bool Ponto::ambosConhecidos(Ponto *ponto2, int dimensao)
 {
     return this->_atributos.at(dimensao) != -1 && ponto2->_atributos.at(dimensao) != -1;
+}
+
+void Ponto::estandardizar(vector<float> media, vector<float> desvio_padrao)
+{
+    for (size_t dimensao = 0; dimensao < _atributos.size(); dimensao++)
+    {
+        _atributos.at(dimensao) = (_atributos.at(dimensao)-media.at(dimensao)) / desvio_padrao.at(dimensao);
+    }
 }

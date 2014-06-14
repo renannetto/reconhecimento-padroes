@@ -90,6 +90,46 @@ void ConjuntoDeDados::normalizarPonto(Ponto *ponto)
     }
 }
 
+void ConjuntoDeDados::estandardizar()
+{
+    vector<float> media;
+    media.resize(dimensoes(), 0.0f);
+    vector<float> desvio_padrao;
+    desvio_padrao.resize(dimensoes(), 0.0f);
+
+    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
+    {
+        Ponto * ponto = _pontos.at(indice_ponto);
+        for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+        {
+            media.at(dimensao) = media.at(dimensao) + ponto->at(dimensao);
+        }
+    }
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        media.at(dimensao) = media.at(dimensao) / _pontos.size();
+    }
+
+    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
+    {
+        Ponto * ponto = _pontos.at(indice_ponto);
+        for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+        {
+            desvio_padrao.at(dimensao) = desvio_padrao.at(dimensao) + ((ponto->at(dimensao)-media.at(dimensao))*(ponto->at(dimensao)-media.at(dimensao)));
+        }
+    }
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        desvio_padrao.at(dimensao) = desvio_padrao.at(dimensao) / (_pontos.size()-1);
+    }
+
+    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
+    {
+        Ponto * ponto = _pontos.at(indice_ponto);
+        ponto->estandardizar(media, desvio_padrao);
+    }
+}
+
 void ConjuntoDeDados::adicionarRuido(int incidencia, int ruido)
 {
     for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
@@ -125,6 +165,11 @@ void ConjuntoDeDados::removerAtributos(int probabilidade)
 int ConjuntoDeDados::classes()
 {
     return _classes;
+}
+
+void ConjuntoDeDados::classes(int classes)
+{
+    _classes = classes;
 }
 
 const vector<Ponto*> ConjuntoDeDados::pontos()

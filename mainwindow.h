@@ -24,6 +24,8 @@
 #include "ibl4.h"
 #include "ibl5.h"
 
+#include "kmeans.h"
+
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
 #include "canvas.h"
@@ -52,8 +54,10 @@ public slots:
     void adicionarRuido();
     void removerAtributos();
     void classificar();
+    void agrupar();
     void carregarArquivo();
     void definirClassificador();
+    void definirAgrupamento();
     void testarPontos();
 
 private:
@@ -66,6 +70,7 @@ private:
 
     ConjuntoDeDados * _dados;
     Classificador * _classificador;
+    Agrupador * _agrupador;
 
     Distancia * distancia();
 };

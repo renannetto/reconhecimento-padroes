@@ -13,6 +13,7 @@ public:
 
     int dimensoes();
     int classe();
+    void classe(int classe);
 
     float at(int dimensao);
     void at(int dimensao, float atributo);
@@ -26,6 +27,8 @@ public:
     int corretas();
 
     bool ambosConhecidos(Ponto * ponto2, int dimensao);
+
+    void estandardizar(vector<float> media, vector<float> desvio_padrao);
 
 private:
     vector<float> _atributos;

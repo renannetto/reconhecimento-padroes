@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     _dados = 0;
     _classificador = 0;
+    _agrupador = 0;
 }
 
 MainWindow::~MainWindow()
@@ -198,6 +199,32 @@ void MainWindow::definirClassificador()
     }
 }
 
+void MainWindow::definirAgrupamento()
+{
+    if (_dados)
+    {
+        if (_agrupador)
+        {
+            delete _agrupador;
+        }
+        if (_ui->arvore_radio->isChecked())
+        {
+
+        } else
+        if (_ui->kmeans_radio->isChecked())
+        {
+            int k = _ui->kmeans_k->value();
+            _agrupador = new KMeans(k);
+            _dados->classes(k);
+        }
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
+}
+
 void MainWindow::mostrarPesos(vector<float> pesos)
 {
     ostringstream stream_pesos;
@@ -285,6 +312,20 @@ void MainWindow::classificar()
     {
         QMessageBox message_box;
         message_box.setText("É necessário definir um classificador primeiro!");
+        message_box.exec();
+    }
+}
+
+void MainWindow::agrupar()
+{
+    if (_agrupador)
+    {
+        _agrupador->agrupar(_dados);
+        _ui->view_dados->desenharPontos(_dados->pontos());
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário definir um agrupador primeiro!");
         message_box.exec();
     }
 }
