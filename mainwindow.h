@@ -25,6 +25,10 @@
 #include "ibl5.h"
 
 #include "kmeans.h"
+#include "agrupamentoarvore.h"
+
+#include "distanciasimples.h"
+#include "distanciacompleta.h"
 
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"

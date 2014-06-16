@@ -209,7 +209,8 @@ void MainWindow::definirAgrupamento()
         }
         if (_ui->arvore_radio->isChecked())
         {
-
+            Distancia * distancia = this->distancia();
+            _agrupador = new AgrupamentoArvore(new DistanciaSimples(distancia));
         } else
         if (_ui->kmeans_radio->isChecked())
         {

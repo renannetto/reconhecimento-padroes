@@ -5,7 +5,7 @@
 
 #include "distanciacluster.h"
 
-class DistanciaSimples : DistanciaCluster
+class DistanciaSimples : public DistanciaCluster
 {
 public:
     DistanciaSimples(Distancia * distancia);
