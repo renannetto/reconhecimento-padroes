@@ -61,7 +61,7 @@ public slots:
     void agrupar();
     void carregarArquivo();
     void definirClassificador();
-    void definirAgrupamento();
+    void definirAgrupador();
     void testarPontos();
 
 private:

@@ -199,7 +199,7 @@ void MainWindow::definirClassificador()
     }
 }
 
-void MainWindow::definirAgrupamento()
+void MainWindow::definirAgrupador()
 {
     if (_dados)
     {
