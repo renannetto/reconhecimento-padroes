@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>935</width>
-    <height>561</height>
+    <height>726</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -257,8 +257,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>400</y>
+      <x>280</x>
+      <y>620</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -275,8 +275,8 @@
    <widget class="QLabel" name="classe_label">
     <property name="geometry">
      <rect>
-      <x>770</x>
-      <y>410</y>
+      <x>370</x>
+      <y>630</y>
       <width>57</width>
       <height>15</height>
      </rect>
@@ -338,8 +338,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>740</x>
-      <y>340</y>
+      <x>390</x>
+      <y>570</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -541,6 +541,232 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>330</y>
+      <width>261</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Distância cluster:</string>
+    </property>
+    <widget class="QRadioButton" name="distancia_simples">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Distância simples</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="distancia_completa">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>141</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Distância completa</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="distancia_media">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>131</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Distância média</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>460</y>
+      <width>261</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Agrupador: </string>
+    </property>
+    <widget class="QRadioButton" name="arvore_radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Agrupador em árvore</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="kmeans_radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>K-Means</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>150</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Definir Agrupador</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Classes:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="min_class">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>60</y>
+       <width>47</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>60</y>
+       <width>21</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>a</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="max_class">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>60</y>
+       <width>47</width>
+       <height>24</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>57</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Platô:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="plato_edit">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>90</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="kmeans_k">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>120</y>
+       <width>47</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>120</y>
+       <width>21</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>K:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>570</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Agrupar</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -631,8 +857,8 @@
    <slot>classificar()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>777</x>
-     <y>414</y>
+     <x>437</x>
+     <y>577</y>
     </hint>
     <hint type="destinationlabel">
      <x>524</x>
@@ -736,6 +962,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>definirAgrupador()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>812</x>
+     <y>656</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>891</x>
+     <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>agrupar()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>276</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>200</x>
+     <y>584</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>gerarEspiral()</slot>
@@ -747,5 +1005,7 @@
   <slot>testarPontos()</slot>
   <slot>adicionarRuido()</slot>
   <slot>removerAtributos()</slot>
+  <slot>definirAgrupador()</slot>
+  <slot>agrupar()</slot>
  </slots>
 </ui>

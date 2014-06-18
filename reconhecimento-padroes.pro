@@ -35,7 +35,13 @@ SOURCES += main.cpp\
     ibl4.cpp \
     ibl5.cpp \
     adicionarruido.cpp \
-    removeratributos.cpp
+    removeratributos.cpp \
+    agrupador.cpp \
+    agrupamentoarvore.cpp \
+    distanciacluster.cpp \
+    distanciacompleta.cpp \
+    distanciasimples.cpp \
+    kmeans.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -59,7 +65,13 @@ HEADERS  += mainwindow.h \
     ibl4.h \
     ibl5.h \
     adicionarruido.h \
-    removeratributos.h
+    removeratributos.h \
+    agrupador.h \
+    agrupamentoarvore.h \
+    distanciacluster.h \
+    distanciacompleta.h \
+    distanciasimples.h \
+    kmeans.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \
