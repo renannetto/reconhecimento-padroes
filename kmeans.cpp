@@ -12,11 +12,13 @@ KMeans::~KMeans()
 
 void KMeans::agrupar(ConjuntoDeDados *dados)
 {
+    ConjuntoDeDados * dados_estandardizados = (dados->dimensoes() > 2) ? dados->estandardizar() : dados;
     vector<Ponto*> pontos = dados->pontos();
+    vector<Ponto*> pontos_estandardizados = dados_estandardizados->pontos();
 
-    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
+    for (size_t indice_ponto = 0; indice_ponto < pontos_estandardizados.size(); indice_ponto++)
     {
-        Ponto * ponto = pontos.at(indice_ponto);
+        Ponto * ponto = pontos_estandardizados.at(indice_ponto);
         int cluster = rand() % _k;
         ponto->classe(cluster);
     }
@@ -24,8 +26,14 @@ void KMeans::agrupar(ConjuntoDeDados *dados)
     bool mudanca = true;
     while (mudanca)
     {
-        vector<Ponto> centroides = atualizarCentroides(pontos);
-        mudanca = agruparPontos(&pontos, centroides);
+        vector<Ponto> centroides = atualizarCentroides(pontos_estandardizados);
+        mudanca = agruparPontos(&pontos_estandardizados, centroides);
+    }
+
+    for (size_t indice_ponto = 0; indice_ponto < pontos_estandardizados.size(); indice_ponto++)
+    {
+        Ponto * ponto = pontos_estandardizados.at(indice_ponto);
+        pontos.at(indice_ponto)->classe(ponto->classe());
     }
 }
 
@@ -39,7 +47,7 @@ vector<Ponto> KMeans::atualizarCentroides(vector<Ponto *> pontos)
     }
     for (int cluster = 0; cluster < _k; cluster++)
     {
-        Ponto ponto(atributos_iniciais, -1);
+        Ponto ponto(atributos_iniciais, cluster);
         centroides.push_back(ponto);
     }
 
@@ -101,4 +109,39 @@ bool KMeans::agruparPontos(vector<Ponto *> * pontos, vector<Ponto> centroides)
     }
 
     return mudanca;
+}
+
+float KMeans::taxaF(ConjuntoDeDados *dados)
+{
+    vector<Ponto*> pontos = dados->pontos();
+
+    vector<Ponto> centroides = atualizarCentroides(pontos);
+    vector<int> contador_cluster;
+    contador_cluster.resize(_k, 0);
+    vector<float> media_global;
+    media_global.resize(dados->dimensoes(), 0.0f);
+
+    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
+    {
+        Ponto * ponto = pontos.at(indice_ponto);
+        int cluster = ponto->classe();
+
+        contador_cluster.at(cluster) = contador_cluster.at(cluster) + 1;
+
+        for (int dimensao = 0; dimensao < dados->dimensoes(); dimensao++)
+        {
+            media_global.at(dimensao) = media_global.at(dimensao) + ponto->at(dimensao);
+        }
+    }
+
+    for (int dimensao = 0; dimensao < dados->dimensoes(); dimensao++)
+    {
+        media_global.at(dimensao) = media_global.at(dimensao) / pontos.size();
+    }
+
+    Ponto variancia_entre;
+    for (size_t cluster = 0; cluster < centroides.size(); cluster++)
+    {
+
+    }
 }

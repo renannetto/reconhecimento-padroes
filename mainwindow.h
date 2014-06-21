@@ -29,6 +29,7 @@
 
 #include "distanciasimples.h"
 #include "distanciacompleta.h"
+#include "distanciamedia.h"
 
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
@@ -77,6 +78,7 @@ private:
     Agrupador * _agrupador;
 
     Distancia * distancia();
+    DistanciaCluster * distanciaCluster();
 };
 
 #endif // MAINWINDOW_H

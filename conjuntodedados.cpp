@@ -45,6 +45,15 @@ ConjuntoDeDados::ConjuntoDeDados(string nome_arquivo)
     }
 }
 
+ConjuntoDeDados::~ConjuntoDeDados()
+{
+    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
+    {
+        delete(_pontos.at(indice_ponto));
+    }
+    _pontos.clear();
+}
+
 void ConjuntoDeDados::normalizar()
 {
     _ponto_min = *_pontos.at(0);
@@ -90,8 +99,10 @@ void ConjuntoDeDados::normalizarPonto(Ponto *ponto)
     }
 }
 
-void ConjuntoDeDados::estandardizar()
+ConjuntoDeDados * ConjuntoDeDados::estandardizar()
 {
+    ConjuntoDeDados * dados_estandardizados = new ConjuntoDeDados(_classes);
+
     vector<float> media;
     media.resize(dimensoes(), 0.0f);
     vector<float> desvio_padrao;
@@ -126,8 +137,10 @@ void ConjuntoDeDados::estandardizar()
     for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
     {
         Ponto * ponto = _pontos.at(indice_ponto);
-        ponto->estandardizar(media, desvio_padrao);
+        dados_estandardizados->_pontos.push_back(ponto->estandardizar(media, desvio_padrao));
     }
+
+    return dados_estandardizados;
 }
 
 void ConjuntoDeDados::adicionarRuido(int incidencia, int ruido)

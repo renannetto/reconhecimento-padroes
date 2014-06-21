@@ -75,10 +75,12 @@ bool Ponto::ambosConhecidos(Ponto *ponto2, int dimensao)
     return this->_atributos.at(dimensao) != -1 && ponto2->_atributos.at(dimensao) != -1;
 }
 
-void Ponto::estandardizar(vector<float> media, vector<float> desvio_padrao)
+Ponto * Ponto::estandardizar(vector<float> media, vector<float> desvio_padrao)
 {
+    vector<float> atributos_estandardizados;
     for (size_t dimensao = 0; dimensao < _atributos.size(); dimensao++)
     {
-        _atributos.at(dimensao) = (_atributos.at(dimensao)-media.at(dimensao)) / desvio_padrao.at(dimensao);
+        atributos_estandardizados.push_back((_atributos.at(dimensao)-media.at(dimensao)) / desvio_padrao.at(dimensao));
     }
+    return new Ponto(atributos_estandardizados, _classe);
 }

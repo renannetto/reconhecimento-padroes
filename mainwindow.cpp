@@ -107,6 +107,20 @@ Distancia * MainWindow::distancia()
     return new DistanciaHamming();
 }
 
+DistanciaCluster * MainWindow::distanciaCluster()
+{
+    Distancia * distancia = this->distancia();
+    if (_ui->distancia_simples->isChecked())
+    {
+        return new DistanciaSimples(distancia);
+    }
+    if (_ui->distancia_completa->isChecked())
+    {
+        return new DistanciaCompleta(distancia);
+    }
+    return new DistanciaMedia(distancia);
+}
+
 void MainWindow::definirClassificador()
 {
     if (_dados)
@@ -209,8 +223,11 @@ void MainWindow::definirAgrupador()
         }
         if (_ui->arvore_radio->isChecked())
         {
-            Distancia * distancia = this->distancia();
-            _agrupador = new AgrupamentoArvore(new DistanciaSimples(distancia));
+            DistanciaCluster * distancia_cluster = distanciaCluster();
+            int min_class = _ui->min_class->value();
+            int max_class = _ui->max_class->value();
+            float plato = _ui->plato_edit->text().toFloat();
+            _agrupador = new AgrupamentoArvore(distancia_cluster, min_class, max_class, plato);
         } else
         if (_ui->kmeans_radio->isChecked())
         {
@@ -322,7 +339,10 @@ void MainWindow::agrupar()
     if (_agrupador)
     {
         _agrupador->agrupar(_dados);
-        _ui->view_dados->desenharPontos(_dados->pontos());
+        if (_dados->dimensoes() == 2)
+        {
+            _ui->view_dados->desenharPontos(_dados->pontos());
+        }
     } else
     {
         QMessageBox message_box;

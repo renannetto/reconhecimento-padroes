@@ -17,10 +17,11 @@ class ConjuntoDeDados
 public:
     ConjuntoDeDados(int classes);
     ConjuntoDeDados(string nome_arquivo);
+    ~ConjuntoDeDados();
 
     void normalizar();
     void normalizarPonto(Ponto * ponto);
-    void estandardizar();
+    ConjuntoDeDados * estandardizar();
     void adicionarRuido(int incidencia, int ruido);
     void removerAtributos(int probabilidade);
 

@@ -21,6 +21,8 @@ private:
 
     vector<Ponto> atualizarCentroides(vector<Ponto*> pontos);
     bool agruparPontos(vector<Ponto*> * pontos, vector<Ponto> centroides);
+
+    float taxaF(ConjuntoDeDados * dados);
 };
 
 #endif // KMEANS_H

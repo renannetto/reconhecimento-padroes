@@ -675,6 +675,9 @@
      <property name="minimum">
       <number>1</number>
      </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
     </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
@@ -698,6 +701,12 @@
        <height>24</height>
       </rect>
      </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
     </widget>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
@@ -720,6 +729,9 @@
        <width>41</width>
        <height>23</height>
       </rect>
+     </property>
+     <property name="text">
+      <string>0.5</string>
      </property>
     </widget>
     <widget class="QSpinBox" name="kmeans_k">

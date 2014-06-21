@@ -28,7 +28,7 @@ public:
 
     bool ambosConhecidos(Ponto * ponto2, int dimensao);
 
-    void estandardizar(vector<float> media, vector<float> desvio_padrao);
+    Ponto * estandardizar(vector<float> media, vector<float> desvio_padrao);
 
 private:
     vector<float> _atributos;

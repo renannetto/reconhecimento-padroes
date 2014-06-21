@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     distanciacluster.cpp \
     distanciacompleta.cpp \
     distanciasimples.cpp \
-    kmeans.cpp
+    kmeans.cpp \
+    distanciamedia.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -71,7 +72,8 @@ HEADERS  += mainwindow.h \
     distanciacluster.h \
     distanciacompleta.h \
     distanciasimples.h \
-    kmeans.h
+    kmeans.h \
+    distanciamedia.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \
