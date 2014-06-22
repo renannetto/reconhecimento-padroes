@@ -84,3 +84,47 @@ Ponto * Ponto::estandardizar(vector<float> media, vector<float> desvio_padrao)
     }
     return new Ponto(atributos_estandardizados, _classe);
 }
+
+const Ponto Ponto::operator +(const Ponto &other)
+{
+    vector<float> novos_atributos;
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        novos_atributos.push_back(this->_atributos.at(dimensao) + other._atributos.at(dimensao));
+    }
+    Ponto ponto(novos_atributos, this->_classe);
+    return ponto;
+}
+
+const Ponto Ponto::operator -(const Ponto &other)
+{
+    vector<float> novos_atributos;
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        novos_atributos.push_back(this->_atributos.at(dimensao) - other._atributos.at(dimensao));
+    }
+    Ponto ponto(novos_atributos, this->_classe);
+    return ponto;
+}
+
+const Ponto Ponto::operator *(const Ponto &other)
+{
+    vector<float> novos_atributos;
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        novos_atributos.push_back(this->_atributos.at(dimensao) * other._atributos.at(dimensao));
+    }
+    Ponto ponto(novos_atributos, this->_classe);
+    return ponto;
+}
+
+const Ponto Ponto::operator /(const Ponto &other)
+{
+    vector<float> novos_atributos;
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        novos_atributos.push_back(this->_atributos.at(dimensao) / other._atributos.at(dimensao));
+    }
+    Ponto ponto(novos_atributos, this->_classe);
+    return ponto;
+}

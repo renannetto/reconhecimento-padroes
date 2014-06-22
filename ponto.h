@@ -30,6 +30,11 @@ public:
 
     Ponto * estandardizar(vector<float> media, vector<float> desvio_padrao);
 
+    const Ponto operator+(const Ponto &other);
+    const Ponto operator-(const Ponto &other);
+    const Ponto operator*(const Ponto &other);
+    const Ponto operator/(const Ponto &other);
+
 private:
     vector<float> _atributos;
     int _classe;

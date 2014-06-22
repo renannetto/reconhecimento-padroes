@@ -799,7 +799,14 @@
     <addaction name="adicionar_ruido"/>
     <addaction name="remover_atributos"/>
    </widget>
+   <widget class="QMenu" name="menuCarregar_Distribuicao_F">
+    <property name="title">
+     <string>Distribuicao F</string>
+    </property>
+    <addaction name="carregar_tabela"/>
+   </widget>
    <addaction name="entrada_menu"/>
+   <addaction name="menuCarregar_Distribuicao_F"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -833,6 +840,11 @@
   <action name="remover_atributos">
    <property name="text">
     <string>Remover atributos</string>
+   </property>
+  </action>
+  <action name="carregar_tabela">
+   <property name="text">
+    <string>Carregar tabela</string>
    </property>
   </action>
  </widget>
@@ -870,7 +882,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>437</x>
-     <y>577</y>
+     <y>614</y>
     </hint>
     <hint type="destinationlabel">
      <x>524</x>
@@ -998,11 +1010,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>276</x>
-     <y>549</y>
+     <y>607</y>
     </hint>
     <hint type="destinationlabel">
      <x>200</x>
      <y>584</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>carregar_tabela</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>carregarDistribuicaoF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>467</x>
+     <y>362</y>
     </hint>
    </hints>
   </connection>
@@ -1019,5 +1047,6 @@
   <slot>removerAtributos()</slot>
   <slot>definirAgrupador()</slot>
   <slot>agrupar()</slot>
+  <slot>carregarDistribuicaoF()</slot>
  </slots>
 </ui>

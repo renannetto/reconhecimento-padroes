@@ -144,4 +144,6 @@ float KMeans::taxaF(ConjuntoDeDados *dados)
     {
 
     }
+
+    return 0.0f;
 }

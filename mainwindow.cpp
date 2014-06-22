@@ -409,3 +409,17 @@ void MainWindow::carregarArquivo()
         message_box.exec();
     }
 }
+
+void MainWindow::carregarDistribuicaoF()
+{
+    QString nome_arquivo = QFileDialog::getOpenFileName(this, tr("Abrir distribuição F"), "");
+
+    try {
+        DistribuicaoF::criarDistribuicao(nome_arquivo.toStdString());
+    } catch (exception &e)
+    {
+        QMessageBox message_box;
+        message_box.setText("Não foi possível carregar a base de dados selecionada");
+        message_box.exec();
+    }
+}

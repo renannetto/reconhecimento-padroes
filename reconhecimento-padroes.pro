@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     distanciacompleta.cpp \
     distanciasimples.cpp \
     kmeans.cpp \
-    distanciamedia.cpp
+    distanciamedia.cpp \
+    distribuicaof.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -73,7 +74,8 @@ HEADERS  += mainwindow.h \
     distanciacompleta.h \
     distanciasimples.h \
     kmeans.h \
-    distanciamedia.h
+    distanciamedia.h \
+    distribuicaof.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \

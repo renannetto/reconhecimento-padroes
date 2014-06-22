@@ -9,6 +9,7 @@
 #include <exception>
 
 #include "paletadecores.h"
+#include "distribuicaof.h"
 
 #include "geracaoespiral.h"
 #include "geracaoaleatorio.h"
@@ -61,6 +62,7 @@ public slots:
     void classificar();
     void agrupar();
     void carregarArquivo();
+    void carregarDistribuicaoF();
     void definirClassificador();
     void definirAgrupador();
     void testarPontos();
