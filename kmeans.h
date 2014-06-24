@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <limits>
 
+#include "distribuicaof.h"
 #include "agrupador.h"
 #include "distanciaeuclides.h"
 
@@ -22,7 +23,7 @@ private:
     vector<Ponto> atualizarCentroides(vector<Ponto*> pontos);
     bool agruparPontos(vector<Ponto*> * pontos, vector<Ponto> centroides);
 
-    float taxaF(ConjuntoDeDados * dados);
+    bool testeF(ConjuntoDeDados * dados);
 };
 
 #endif // KMEANS_H

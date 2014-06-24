@@ -343,6 +343,15 @@ void MainWindow::agrupar()
         {
             _ui->view_dados->desenharPontos(_dados->pontos());
         }
+
+        bool teste_f = _agrupador->testeF(_dados);
+        if (teste_f)
+        {
+            _ui->teste_f_label->setText(QString("Passou"));
+        } else
+        {
+            _ui->teste_f_label->setText(QString("Falhou"));
+        }
     } else
     {
         QMessageBox message_box;

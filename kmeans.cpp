@@ -40,14 +40,10 @@ void KMeans::agrupar(ConjuntoDeDados *dados)
 vector<Ponto> KMeans::atualizarCentroides(vector<Ponto *> pontos)
 {
     vector<Ponto> centroides;
-    vector<float> atributos_iniciais;
-    for (int dimensao = 0; dimensao < pontos.at(0)->dimensoes(); dimensao++)
-    {
-        atributos_iniciais.push_back(0.0f);
-    }
+    int dimensoes = pontos.at(0)->dimensoes();
     for (int cluster = 0; cluster < _k; cluster++)
     {
-        Ponto ponto(atributos_iniciais, cluster);
+        Ponto ponto(dimensoes, cluster);
         centroides.push_back(ponto);
     }
 
@@ -62,21 +58,13 @@ vector<Ponto> KMeans::atualizarCentroides(vector<Ponto *> pontos)
         contador_cluster.at(cluster) = contador_cluster.at(cluster) + 1;
 
         Ponto * centroide = &centroides.at(cluster);
-        for (int dimensao = 0; dimensao < centroide->dimensoes(); dimensao++)
-        {
-            float novo_atributo = centroide->at(dimensao) + ponto->at(dimensao);
-            centroide->at(dimensao, novo_atributo);
-        }
+        *centroide = *centroide + *ponto;
     }
 
     for (int cluster = 0; cluster < _k; cluster++)
     {
         Ponto * centroide = &centroides.at(cluster);
-        for (int dimensao = 0; dimensao < centroide->dimensoes(); dimensao++)
-        {
-            float novo_atributo = centroide->at(dimensao) / contador_cluster.at(cluster);
-            centroide->at(dimensao, novo_atributo);
-        }
+        *centroide = *centroide / contador_cluster.at(cluster);
     }
 
     return centroides;
@@ -111,15 +99,14 @@ bool KMeans::agruparPontos(vector<Ponto *> * pontos, vector<Ponto> centroides)
     return mudanca;
 }
 
-float KMeans::taxaF(ConjuntoDeDados *dados)
+bool KMeans::testeF(ConjuntoDeDados *dados)
 {
     vector<Ponto*> pontos = dados->pontos();
 
     vector<Ponto> centroides = atualizarCentroides(pontos);
     vector<int> contador_cluster;
     contador_cluster.resize(_k, 0);
-    vector<float> media_global;
-    media_global.resize(dados->dimensoes(), 0.0f);
+    Ponto media_global(dados->dimensoes());
 
     for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
@@ -128,22 +115,51 @@ float KMeans::taxaF(ConjuntoDeDados *dados)
 
         contador_cluster.at(cluster) = contador_cluster.at(cluster) + 1;
 
-        for (int dimensao = 0; dimensao < dados->dimensoes(); dimensao++)
-        {
-            media_global.at(dimensao) = media_global.at(dimensao) + ponto->at(dimensao);
-        }
+        media_global = media_global + *ponto;
     }
+
+    media_global = media_global / pontos.size();
+
+    Ponto variancia_entre(dados->dimensoes());
+    for (size_t cluster = 0; cluster < centroides.size(); cluster++)
+    {
+        Ponto variancia_cluster(dados->dimensoes());
+        variancia_cluster = centroides.at(cluster) - media_global;
+        variancia_cluster = variancia_cluster * variancia_cluster * contador_cluster.at(cluster);
+
+        variancia_entre = variancia_entre + variancia_cluster;
+    }
+
+    Ponto variancia_total(dados->dimensoes());
+    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
+    {
+        Ponto * ponto = pontos.at(indice_ponto);
+        Ponto variancia_ponto(dados->dimensoes());
+
+        variancia_ponto = *ponto - media_global;
+        variancia_ponto = variancia_ponto * variancia_ponto;
+
+        variancia_total = variancia_total + variancia_ponto;
+    }
+
+    Ponto variancia_dentro = variancia_total - variancia_entre;
+
+    int d1 = _k - 1;
+    int d2 = pontos.size() - _k;
+    pair<int, int> indice_f(d1, d2);
+
+    Ponto variancia_entre_bar = variancia_entre / d1;
+    Ponto variancia_dentro_bar = variancia_dentro / d2;
+
+    Ponto f_score = variancia_entre_bar / variancia_dentro_bar;
 
     for (int dimensao = 0; dimensao < dados->dimensoes(); dimensao++)
     {
-        media_global.at(dimensao) = media_global.at(dimensao) / pontos.size();
+        if (f_score.at(dimensao) > DistribuicaoF::_distribuicao[indice_f])
+        {
+            return false;
+        }
     }
 
-    Ponto variancia_entre;
-    for (size_t cluster = 0; cluster < centroides.size(); cluster++)
-    {
-
-    }
-
-    return 0.0f;
+    return true;
 }

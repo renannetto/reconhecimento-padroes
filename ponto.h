@@ -9,6 +9,7 @@ class Ponto
 {
 public:
     Ponto();
+    Ponto(int dimensoes, int classe = -1);
     Ponto(vector<float> atributos, int classe = -1);
 
     int dimensoes();
@@ -30,10 +31,11 @@ public:
 
     Ponto * estandardizar(vector<float> media, vector<float> desvio_padrao);
 
-    const Ponto operator+(const Ponto &other);
-    const Ponto operator-(const Ponto &other);
-    const Ponto operator*(const Ponto &other);
-    const Ponto operator/(const Ponto &other);
+    Ponto operator+(const Ponto &other);
+    Ponto operator-(const Ponto &other);
+    Ponto operator*(const Ponto &other);
+    Ponto operator/(const Ponto &other);
+    Ponto operator/(const int escalar);
 
 private:
     vector<float> _atributos;

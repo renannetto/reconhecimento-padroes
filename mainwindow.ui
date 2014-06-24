@@ -257,7 +257,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>440</x>
       <y>620</y>
       <width>81</width>
       <height>31</height>
@@ -275,7 +275,7 @@
    <widget class="QLabel" name="classe_label">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>530</x>
       <y>630</y>
       <width>57</width>
       <height>15</height>
@@ -338,7 +338,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>460</x>
       <y>570</y>
       <width>121</width>
       <height>41</height>
@@ -764,7 +764,7 @@
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>140</x>
       <y>570</y>
       <width>121</width>
       <height>41</height>
@@ -777,6 +777,42 @@
     </property>
     <property name="text">
      <string>Agrupar</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="teste_f_label">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>630</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>620</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Teste F:</string>
     </property>
    </widget>
   </widget>

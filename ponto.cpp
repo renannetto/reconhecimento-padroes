@@ -7,6 +7,14 @@ Ponto::Ponto()
     _corretas = 0;
 }
 
+Ponto::Ponto(int dimensoes, int classe)
+{
+    _atributos.resize(dimensoes, 0.0f);
+    _classe = classe;
+    _contador = 0;
+    _corretas = 0;
+}
+
 Ponto::Ponto(vector<float> atributos, int classe)
 {
     _atributos = atributos;
@@ -85,7 +93,7 @@ Ponto * Ponto::estandardizar(vector<float> media, vector<float> desvio_padrao)
     return new Ponto(atributos_estandardizados, _classe);
 }
 
-const Ponto Ponto::operator +(const Ponto &other)
+Ponto Ponto::operator +(const Ponto &other)
 {
     vector<float> novos_atributos;
     for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
@@ -96,7 +104,7 @@ const Ponto Ponto::operator +(const Ponto &other)
     return ponto;
 }
 
-const Ponto Ponto::operator -(const Ponto &other)
+Ponto Ponto::operator -(const Ponto &other)
 {
     vector<float> novos_atributos;
     for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
@@ -107,7 +115,7 @@ const Ponto Ponto::operator -(const Ponto &other)
     return ponto;
 }
 
-const Ponto Ponto::operator *(const Ponto &other)
+Ponto Ponto::operator *(const Ponto &other)
 {
     vector<float> novos_atributos;
     for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
@@ -118,12 +126,23 @@ const Ponto Ponto::operator *(const Ponto &other)
     return ponto;
 }
 
-const Ponto Ponto::operator /(const Ponto &other)
+Ponto Ponto::operator /(const Ponto &other)
 {
     vector<float> novos_atributos;
     for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
     {
         novos_atributos.push_back(this->_atributos.at(dimensao) / other._atributos.at(dimensao));
+    }
+    Ponto ponto(novos_atributos, this->_classe);
+    return ponto;
+}
+
+Ponto Ponto::operator /(const int escalar)
+{
+    vector<float> novos_atributos;
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        novos_atributos.push_back(this->_atributos.at(dimensao) / escalar);
     }
     Ponto ponto(novos_atributos, this->_classe);
     return ponto;

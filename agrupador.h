@@ -10,6 +10,8 @@ public:
     virtual ~Agrupador();
 
     virtual void agrupar(ConjuntoDeDados * dados) = 0;
+
+    virtual bool testeF(ConjuntoDeDados * dados);
 };
 
 #endif // AGRUPADOR_H
