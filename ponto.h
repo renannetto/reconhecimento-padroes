@@ -36,6 +36,7 @@ public:
     Ponto operator*(const Ponto &other);
     Ponto operator/(const Ponto &other);
     Ponto operator/(const int escalar);
+    Ponto operator*(const int escalar);
 
 private:
     vector<float> _atributos;

@@ -18,6 +18,8 @@ public:
     static void criarDistribuicao(string nome_arquivo);
 
     static map<pair<int, int>, float> _distribuicao;
+    static int _max_d1;
+    static int _max_d2;
 };
 
 #endif // DISTRIBUICAOF_H

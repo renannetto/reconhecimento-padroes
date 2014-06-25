@@ -12,7 +12,7 @@ KMeans::~KMeans()
 
 void KMeans::agrupar(ConjuntoDeDados *dados)
 {
-    ConjuntoDeDados * dados_estandardizados = (dados->dimensoes() > 2) ? dados->estandardizar() : dados;
+    ConjuntoDeDados * dados_estandardizados = dados->estandardizar();
     vector<Ponto*> pontos = dados->pontos();
     vector<Ponto*> pontos_estandardizados = dados_estandardizados->pontos();
 
@@ -64,7 +64,10 @@ vector<Ponto> KMeans::atualizarCentroides(vector<Ponto *> pontos)
     for (int cluster = 0; cluster < _k; cluster++)
     {
         Ponto * centroide = &centroides.at(cluster);
-        *centroide = *centroide / contador_cluster.at(cluster);
+        if (contador_cluster.at(cluster) > 0)
+        {
+            *centroide = *centroide / contador_cluster.at(cluster);
+        }
     }
 
     return centroides;
@@ -101,7 +104,7 @@ bool KMeans::agruparPontos(vector<Ponto *> * pontos, vector<Ponto> centroides)
 
 bool KMeans::testeF(ConjuntoDeDados *dados)
 {
-    vector<Ponto*> pontos = dados->pontos();
+    vector<Ponto*> pontos = dados->estandardizar()->pontos();
 
     vector<Ponto> centroides = atualizarCentroides(pontos);
     vector<int> contador_cluster;
@@ -120,42 +123,43 @@ bool KMeans::testeF(ConjuntoDeDados *dados)
 
     media_global = media_global / pontos.size();
 
-    Ponto variancia_entre(dados->dimensoes());
+    Ponto sq_entre(dados->dimensoes());
     for (size_t cluster = 0; cluster < centroides.size(); cluster++)
     {
-        Ponto variancia_cluster(dados->dimensoes());
-        variancia_cluster = centroides.at(cluster) - media_global;
-        variancia_cluster = variancia_cluster * variancia_cluster * contador_cluster.at(cluster);
+        Ponto sq_cluster(dados->dimensoes());
+        sq_cluster = centroides.at(cluster) - media_global;
+        sq_cluster = sq_cluster * sq_cluster * contador_cluster.at(cluster);
 
-        variancia_entre = variancia_entre + variancia_cluster;
+        sq_entre = sq_entre + sq_cluster;
     }
 
-    Ponto variancia_total(dados->dimensoes());
+    Ponto sq_total(dados->dimensoes());
     for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
         Ponto * ponto = pontos.at(indice_ponto);
-        Ponto variancia_ponto(dados->dimensoes());
+        Ponto sq_ponto(dados->dimensoes());
 
-        variancia_ponto = *ponto - media_global;
-        variancia_ponto = variancia_ponto * variancia_ponto;
+        sq_ponto = *ponto - media_global;
+        sq_ponto = sq_ponto * sq_ponto;
 
-        variancia_total = variancia_total + variancia_ponto;
+        sq_total = sq_total + sq_ponto;
     }
 
-    Ponto variancia_dentro = variancia_total - variancia_entre;
+    Ponto sq_dentro = sq_total - sq_entre;
 
-    int d1 = _k - 1;
-    int d2 = pontos.size() - _k;
+    int d1 = min(_k - 1, DistribuicaoF::_max_d1);
+    int d2 = min((int)pontos.size() - _k, DistribuicaoF::_max_d2);
     pair<int, int> indice_f(d1, d2);
 
-    Ponto variancia_entre_bar = variancia_entre / d1;
-    Ponto variancia_dentro_bar = variancia_dentro / d2;
+    Ponto sq_entre_bar = sq_entre / d1;
+    Ponto sq_dentro_bar = sq_dentro / d2;
 
-    Ponto f_score = variancia_entre_bar / variancia_dentro_bar;
+    Ponto f_score = sq_entre_bar / sq_dentro_bar;
 
     for (int dimensao = 0; dimensao < dados->dimensoes(); dimensao++)
     {
-        if (f_score.at(dimensao) > DistribuicaoF::_distribuicao[indice_f])
+        float valor_critico = DistribuicaoF::_distribuicao[indice_f];
+        if (f_score.at(dimensao) < valor_critico)
         {
             return false;
         }

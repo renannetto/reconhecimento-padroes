@@ -147,3 +147,14 @@ Ponto Ponto::operator /(const int escalar)
     Ponto ponto(novos_atributos, this->_classe);
     return ponto;
 }
+
+Ponto Ponto::operator *(const int escalar)
+{
+    vector<float> novos_atributos;
+    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+    {
+        novos_atributos.push_back(this->_atributos.at(dimensao) * escalar);
+    }
+    Ponto ponto(novos_atributos, this->_classe);
+    return ponto;
+}
