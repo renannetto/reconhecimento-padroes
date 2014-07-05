@@ -16,15 +16,6 @@
 #include "adicionarruido.h"
 #include "removeratributos.h"
 
-#include "espiralsimples.h"
-#include "classificador.h"
-#include "nearestneighbor.h"
-#include "ibl1.h"
-#include "ibl2.h"
-#include "ibl3.h"
-#include "ibl4.h"
-#include "ibl5.h"
-
 #include "kmeans.h"
 #include "agrupamentoarvore.h"
 
@@ -59,13 +50,10 @@ public slots:
     void gerarAleatorio();
     void adicionarRuido();
     void removerAtributos();
-    void classificar();
-    void agrupar();
+    void agruparKMeans();
+    void construirDendograma();
     void carregarArquivo();
     void carregarDistribuicaoF();
-    void definirClassificador();
-    void definirAgrupador();
-    void testarPontos();
 
 private:
     Ui::MainWindow * _ui;
@@ -76,8 +64,8 @@ private:
     RemoverAtributos * _remover;
 
     ConjuntoDeDados * _dados;
-    Classificador * _classificador;
-    Agrupador * _agrupador;
+    KMeans * _kmeans;
+    AgrupamentoArvore * _agrupamento_arvore;
 
     Distancia * distancia();
     DistanciaCluster * distanciaCluster();

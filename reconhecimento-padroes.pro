@@ -23,17 +23,9 @@ SOURCES += main.cpp\
     distanciaeuclides.cpp \
     distanciahamming.cpp \
     geracaoaleatorio.cpp \
-    nearestneighbor.cpp \
     paletadecores.cpp \
     canvas.cpp \
     espiraldupla.cpp \
-    classificador.cpp \
-    ibl.cpp \
-    ibl1.cpp \
-    ibl2.cpp \
-    ibl3.cpp \
-    ibl4.cpp \
-    ibl5.cpp \
     adicionarruido.cpp \
     removeratributos.cpp \
     agrupador.cpp \
@@ -55,17 +47,9 @@ HEADERS  += mainwindow.h \
     distanciaeuclides.h \
     distanciahamming.h \
     geracaoaleatorio.h \
-    nearestneighbor.h \
     paletadecores.h \
     canvas.h \
     espiraldupla.h \
-    classificador.h \
-    ibl.h \
-    ibl1.h \
-    ibl2.h \
-    ibl3.h \
-    ibl4.h \
-    ibl5.h \
     adicionarruido.h \
     removeratributos.h \
     agrupador.h \

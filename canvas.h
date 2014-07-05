@@ -27,9 +27,6 @@ private:
 
     QGraphicsScene * _viewport;
 
-protected:
-    virtual void mousePressEvent(QMouseEvent *event);
-
 
 public slots:
 

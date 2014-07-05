@@ -6,12 +6,6 @@ Canvas::Canvas(QWidget *parent) : QGraphicsView(parent)
     setScene(_viewport);
 }
 
-void Canvas::mousePressEvent(QMouseEvent *event)
-{
-    QPointF ponto = mapToScene(QPoint(event->x(), event->y()));
-    _main_window->mousePressEvent(ponto.x(), ponto.y());
-}
-
 void Canvas::fixarMainWindow(MainWindow * main_window)
 {
     _main_window = main_window;
