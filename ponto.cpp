@@ -93,6 +93,15 @@ Ponto * Ponto::estandardizar(vector<float> media, vector<float> desvio_padrao)
     return new Ponto(atributos_estandardizados, _classe);
 }
 
+void Ponto::exportar(ofstream &stream)
+{
+    for (size_t dimensao = 0; dimensao < _atributos.size(); dimensao++)
+    {
+        stream << _atributos.at(dimensao) << " ";
+    }
+    stream << _classe << endl;
+}
+
 Ponto Ponto::operator +(const Ponto &other)
 {
     vector<float> novos_atributos;

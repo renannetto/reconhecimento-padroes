@@ -102,7 +102,7 @@ bool KMeans::agruparPontos(vector<Ponto *> * pontos, vector<Ponto> centroides)
     return mudanca;
 }
 
-bool KMeans::testeF(ConjuntoDeDados *dados)
+bool KMeans::testeANOVA(ConjuntoDeDados *dados)
 {
     vector<Ponto*> pontos = dados->estandardizar()->pontos();
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>935</width>
-    <height>554</height>
+    <width>936</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>110</y>
       <width>921</width>
       <height>481</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -40,11 +40,11 @@
        </rect>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="distancia_cluster_group">
       <property name="geometry">
        <rect>
         <x>660</x>
-        <y>100</y>
+        <y>10</y>
         <width>251</width>
         <height>121</height>
        </rect>
@@ -95,56 +95,11 @@
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="distancia_group">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>0</y>
-        <width>251</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Distância:</string>
-      </property>
-      <widget class="QRadioButton" name="hamming_radio">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>100</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Hamming</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="euclides_radio">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>100</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Euclides</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
         <x>690</x>
-        <y>260</y>
+        <y>150</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -156,6 +111,47 @@
       </property>
       <property name="text">
        <string>Construir Dendograma</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>210</y>
+        <width>57</width>
+        <height>15</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Corte:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="corte_dendograma">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>210</y>
+        <width>113</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>240</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Exportar Classificação</string>
       </property>
      </widget>
     </widget>
@@ -187,56 +183,11 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QGroupBox" name="distancia_group_2">
-      <property name="geometry">
-       <rect>
-        <x>660</x>
-        <y>10</y>
-        <width>251</width>
-        <height>91</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Distância:</string>
-      </property>
-      <widget class="QRadioButton" name="hamming_radio_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>100</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Hamming</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QRadioButton" name="euclides_radio_2">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>60</y>
-         <width>100</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Euclides</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </widget>
      <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
        <rect>
         <x>730</x>
-        <y>170</y>
+        <y>60</y>
         <width>80</width>
         <height>41</height>
        </rect>
@@ -254,7 +205,7 @@
       <property name="geometry">
        <rect>
         <x>660</x>
-        <y>130</y>
+        <y>10</y>
         <width>21</width>
         <height>16</height>
        </rect>
@@ -263,11 +214,11 @@
        <string>K:</string>
       </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox">
+     <widget class="QSpinBox" name="kmeans_k">
       <property name="geometry">
        <rect>
         <x>690</x>
-        <y>130</y>
+        <y>10</y>
         <width>47</width>
         <height>24</height>
        </rect>
@@ -317,13 +268,58 @@
      <string/>
     </property>
    </widget>
+   <widget class="QGroupBox" name="distancia_group">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>251</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Distância:</string>
+    </property>
+    <widget class="QRadioButton" name="hamming_radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hamming</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="euclides_radio">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>100</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Euclides</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>935</width>
+     <width>936</width>
      <height>20</height>
     </rect>
    </property>
@@ -524,6 +520,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>exportarClassificacao()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>853</x>
+     <y>441</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>853</x>
+     <y>473</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>gerarEspiral()</slot>
@@ -535,5 +547,6 @@
   <slot>carregarDistribuicaoF()</slot>
   <slot>construirDendograma()</slot>
   <slot>agruparKMeans()</slot>
+  <slot>exportarClassificacao()</slot>
  </slots>
 </ui>

@@ -4,22 +4,23 @@
 #include <limits>
 #include <set>
 
-#include "agrupador.h"
+#include "nododendograma.h"
+#include "conjuntodedados.h"
 #include "distanciacluster.h"
 
-class AgrupamentoArvore : public Agrupador
+class AgrupamentoArvore
 {
 public:
-    AgrupamentoArvore(DistanciaCluster * distancia, int min_class, int max_class, float plato);
+    AgrupamentoArvore(ConjuntoDeDados * dados, DistanciaCluster * distancia);
     ~AgrupamentoArvore();
 
-    void agrupar(ConjuntoDeDados * dados);
+    void agrupar();
+    void exportarClassificacao(string nome_arquivo, float corte);
 
 private:
+    ConjuntoDeDados * _dados;
     DistanciaCluster * _distancia;
-    int _min_class;
-    int _max_class;
-    float _plato;
+    NodoDendograma * _raiz;
 };
 
 #endif // AGRUPAMENTOARVORE_H

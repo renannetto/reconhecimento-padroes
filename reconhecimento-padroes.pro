@@ -28,14 +28,14 @@ SOURCES += main.cpp\
     espiraldupla.cpp \
     adicionarruido.cpp \
     removeratributos.cpp \
-    agrupador.cpp \
     agrupamentoarvore.cpp \
     distanciacluster.cpp \
     distanciacompleta.cpp \
     distanciasimples.cpp \
     kmeans.cpp \
     distanciamedia.cpp \
-    distribuicaof.cpp
+    distribuicaof.cpp \
+    nododendograma.cpp
 
 HEADERS  += mainwindow.h \
     ponto.h \
@@ -52,14 +52,14 @@ HEADERS  += mainwindow.h \
     espiraldupla.h \
     adicionarruido.h \
     removeratributos.h \
-    agrupador.h \
     agrupamentoarvore.h \
     distanciacluster.h \
     distanciacompleta.h \
     distanciasimples.h \
     kmeans.h \
     distanciamedia.h \
-    distribuicaof.h
+    distribuicaof.h \
+    nododendograma.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \

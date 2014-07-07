@@ -52,6 +52,7 @@ public slots:
     void removerAtributos();
     void agruparKMeans();
     void construirDendograma();
+    void exportarClassificacao();
     void carregarArquivo();
     void carregarDistribuicaoF();
 

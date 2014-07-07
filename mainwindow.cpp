@@ -155,7 +155,9 @@ void MainWindow::agruparKMeans()
 {
     if (_dados)
     {
-
+        int k = _ui->kmeans_k->value();
+        _kmeans = new KMeans(k);
+        _kmeans->agrupar(_dados);
     } else
     {
         QMessageBox message_box;
@@ -168,11 +170,27 @@ void MainWindow::construirDendograma()
 {
     if (_dados)
     {
-
+        _agrupamento_arvore = new AgrupamentoArvore(_dados, distanciaCluster());
+        _agrupamento_arvore->agrupar();
     } else
     {
         QMessageBox message_box;
         message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
+}
+
+void MainWindow::exportarClassificacao()
+{
+    if (_agrupamento_arvore)
+    {
+        QString nome_arquivo = QFileDialog::getSaveFileName(this, tr("Arquivo para exportar"), "");
+        float corte = _ui->corte_dendograma->text().toFloat();
+        _agrupamento_arvore->exportarClassificacao(nome_arquivo.toStdString(), corte);
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário construir um dendograma primeiro!");
         message_box.exec();
     }
 }
