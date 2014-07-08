@@ -99,17 +99,6 @@ DistanciaCluster * MainWindow::distanciaCluster()
     return new DistanciaMedia(distancia);
 }
 
-void MainWindow::mostrarPesos(vector<float> pesos)
-{
-    ostringstream stream_pesos;
-    for (size_t dimensao = 0; dimensao < pesos.size(); dimensao++)
-    {
-        float peso = pesos.at(dimensao);
-        stream_pesos << peso << " ";
-    }
-    _ui->pesos->setText(QString::fromStdString(stream_pesos.str()));
-}
-
 void MainWindow::dados(ConjuntoDeDados *dados)
 {
     if (_dados)
@@ -156,12 +145,40 @@ void MainWindow::agruparKMeans()
     if (_dados)
     {
         int k = _ui->kmeans_k->value();
-        _kmeans = new KMeans(k);
-        _kmeans->agrupar(_dados);
+        _kmeans = new KMeans(_dados, k);
+        _kmeans->agrupar();
+
+        anova resultado_anova = _kmeans->testeANOVA(_dados);
+        QString sqentre_string, sqdentro_string, fscore_string, resultado_string;
+        for (int dimensao = 0; dimensao < _dados->dimensoes(); dimensao++)
+        {
+            sqentre_string += QString::number(resultado_anova.sqentre.at(dimensao)) + "\n";
+            sqdentro_string += QString::number(resultado_anova.sqdentro.at(dimensao)) + "\n";
+            fscore_string += QString::number(resultado_anova.fscore.at(dimensao)) + "\n";
+            resultado_string += (resultado_anova.resultado.at(dimensao)) ? "passou\n" : "falhou\n";
+        }
+        _ui->sqentre_edit->setText(sqentre_string);
+        _ui->sqdentro_edit->setText(sqdentro_string);
+        _ui->fscore_edit->setText(fscore_string);
+        _ui->resultado_edit->setText(resultado_string);
     } else
     {
         QMessageBox message_box;
         message_box.setText("É necessário carregar um conjunto de dados primeiro!");
+        message_box.exec();
+    }
+}
+
+void MainWindow::exportarKMeans()
+{
+    if (_kmeans)
+    {
+        QString nome_arquivo = QFileDialog::getSaveFileName(this, tr("Arquivo para exportar"), "");
+        _kmeans->exportar(nome_arquivo.toStdString());
+    } else
+    {
+        QMessageBox message_box;
+        message_box.setText("É necessário construir um dendograma primeiro!");
         message_box.exec();
     }
 }

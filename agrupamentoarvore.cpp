@@ -52,6 +52,8 @@ void AgrupamentoArvore::agrupar()
         _raiz = new NodoDendograma(novo_cluster_pontos, menor_distancia, clusters_proximos.first, clusters_proximos.second);
         clusters.insert(_raiz);
     }
+
+    _raiz->normalizar(_raiz->distanciaMaxima());
 }
 
 void AgrupamentoArvore::exportarClassificacao(string nome_arquivo, float corte)
@@ -77,4 +79,6 @@ void AgrupamentoArvore::exportarClassificacao(string nome_arquivo, float corte)
         }
         ponto->exportar(arquivo);
     }
+
+    arquivo.close();
 }

@@ -10,7 +10,7 @@ NodoDendograma::NodoDendograma(vector<Ponto*> instancias, float distancia, NodoD
 
 vector<NodoDendograma*> NodoDendograma::obterCorte(vector<NodoDendograma*> nodos_corte, float corte)
 {
-    if (_distancia < corte)
+    if (_distancia <= corte)
     {
         nodos_corte.push_back(this);
         return nodos_corte;
@@ -31,6 +31,29 @@ bool NodoDendograma::contem(Ponto *ponto)
         }
     }
     return false;
+}
+
+float NodoDendograma::distanciaMaxima()
+{
+    if (!_ramo1 && !_ramo2)
+    {
+        return _distancia;
+    }
+    float ramos_maximo = max(_ramo1->distanciaMaxima(), _ramo2->distanciaMaxima());
+    return max(ramos_maximo, _distancia);
+}
+
+void NodoDendograma::normalizar(float distancia_maxima)
+{
+    _distancia = _distancia / distancia_maxima;
+    if (_ramo1)
+    {
+        _ramo1->normalizar(distancia_maxima);
+    }
+    if (_ramo2)
+    {
+        _ramo2->normalizar(distancia_maxima);
+    }
 }
 
 vector<Ponto*> NodoDendograma::pontos()

@@ -7,18 +7,21 @@
 #include "conjuntodedados.h"
 #include "distribuicaof.h"
 #include "distanciaeuclides.h"
+#include "anova.h"
 
 class KMeans
 {
 public:
-    KMeans(int k);
+    KMeans(ConjuntoDeDados * dados, int k);
     ~KMeans();
 
-    void agrupar(ConjuntoDeDados * dados);
+    void agrupar();
 
-    bool testeANOVA(ConjuntoDeDados * dados);
+    anova testeANOVA(ConjuntoDeDados * dados);
+    void exportar(string nome_arquivo);
 
 private:
+    ConjuntoDeDados * _dados;
     int _k;
     DistanciaEuclides _distancia;
 

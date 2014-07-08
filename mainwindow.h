@@ -43,7 +43,6 @@ public:
     void dados(ConjuntoDeDados * dados);
     void adicionarRuido(int incidencia, int ruido);
     void removerAtributos(int probabilidade);
-    void mostrarPesos(vector<float> pesos);
 
 public slots:
     void gerarEspiral();
@@ -51,6 +50,7 @@ public slots:
     void adicionarRuido();
     void removerAtributos();
     void agruparKMeans();
+    void exportarKMeans();
     void construirDendograma();
     void exportarClassificacao();
     void carregarArquivo();

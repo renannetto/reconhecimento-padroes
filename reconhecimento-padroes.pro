@@ -59,7 +59,8 @@ HEADERS  += mainwindow.h \
     kmeans.h \
     distanciamedia.h \
     distribuicaof.h \
-    nododendograma.h
+    nododendograma.h \
+    anova.h
 
 FORMS    += mainwindow.ui \
     geracaoespiral.ui \

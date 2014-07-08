@@ -14,6 +14,8 @@ public:
 
     vector<NodoDendograma*> obterCorte(vector<NodoDendograma*> nodos_corte, float corte);
     bool contem(Ponto * ponto);
+    float distanciaMaxima();
+    void normalizar(float distancia_maxima);
 
     vector<Ponto*> pontos();
 
