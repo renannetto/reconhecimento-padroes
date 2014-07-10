@@ -5,8 +5,9 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <iostream>
-#include "mainwindow.h"
 #include <QWheelEvent>
+
+#include "ponto.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
     void fixarMainWindow(MainWindow * main_window);
     void desenharPontos(vector<Ponto*> pontos);
     void desenharPonto(Ponto ponto);
+    void desenharLinha(float x1, float y1, float x2, float y2);
     void limpar();
 
 private:

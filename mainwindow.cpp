@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     _espirais = new GeracaoEspiral(this);
     _espirais->setVisible(false);
 
-    int largura = _ui->view_dados->width();
-    int altura = _ui->view_dados->height();
+    int largura = _ui->view_dendograma->width();
+    int altura = _ui->view_dendograma->height();
     _aleatorio = new GeracaoAleatorio(this, largura, altura);
     _aleatorio->setVisible(false);
 
@@ -107,10 +107,6 @@ void MainWindow::dados(ConjuntoDeDados *dados)
     }
 
     _dados = dados;
-    if (_dados->dimensoes()==2)
-    {
-        _ui->view_dados->desenharPontos(dados->pontos());
-    }
 }
 
 void MainWindow::adicionarRuido(int incidencia, int ruido)
@@ -118,7 +114,6 @@ void MainWindow::adicionarRuido(int incidencia, int ruido)
     if (_dados)
     {
         _dados->adicionarRuido(incidencia, ruido);
-        _ui->view_dados->desenharPontos(_dados->pontos());
     } else
     {
         QMessageBox message_box;
@@ -188,7 +183,8 @@ void MainWindow::construirDendograma()
     if (_dados)
     {
         _agrupamento_arvore = new AgrupamentoArvore(_dados, distanciaCluster());
-        _agrupamento_arvore->agrupar();
+        NodoDendograma * dendograma = _agrupamento_arvore->agrupar();
+        dendograma->desenhar(_ui->view_dendograma, _ui->view_dendograma->height() / 2);
     } else
     {
         QMessageBox message_box;

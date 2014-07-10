@@ -14,7 +14,7 @@ public:
     AgrupamentoArvore(ConjuntoDeDados * dados, DistanciaCluster * distancia);
     ~AgrupamentoArvore();
 
-    void agrupar();
+    NodoDendograma * agrupar();
     void exportarClassificacao(string nome_arquivo, float corte);
 
 private:

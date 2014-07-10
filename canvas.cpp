@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include "mainwindow.h"
 
 Canvas::Canvas(QWidget *parent) : QGraphicsView(parent)
 {
@@ -26,6 +27,11 @@ void Canvas::desenharPonto(Ponto ponto)
     QColor cor = PaletaDeCores::cores.at(classe);
 
     _viewport->addEllipse(ponto.x()-2.5f, ponto.y()-2.5f, 5.0f, 5.0f, QPen(cor), QBrush(cor));
+}
+
+void Canvas::desenharLinha(float x1, float y1, float x2, float y2)
+{
+    _viewport->addLine(x1, y1, x2, y2);
 }
 
 void Canvas::limpar()

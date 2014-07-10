@@ -24,13 +24,13 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>Agrupamento em árore</string>
      </attribute>
-     <widget class="Canvas" name="view_dados">
+     <widget class="Canvas" name="view_dendograma">
       <property name="geometry">
        <rect>
         <x>0</x>

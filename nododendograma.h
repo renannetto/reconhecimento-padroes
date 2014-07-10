@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "ponto.h"
+#include "canvas.h"
 
 using namespace std;
 
@@ -16,6 +17,8 @@ public:
     bool contem(Ponto * ponto);
     float distanciaMaxima();
     void normalizar(float distancia_maxima);
+
+    void desenhar(Canvas * viewport, int posicao);
 
     vector<Ponto*> pontos();
 

@@ -10,7 +10,7 @@ AgrupamentoArvore::~AgrupamentoArvore()
 {
 }
 
-void AgrupamentoArvore::agrupar()
+NodoDendograma * AgrupamentoArvore::agrupar()
 {
     ConjuntoDeDados * dados_estandardizados = _dados->estandardizar();
     vector<Ponto*> pontos_estandardizados = dados_estandardizados->pontos();
@@ -54,6 +54,8 @@ void AgrupamentoArvore::agrupar()
     }
 
     _raiz->normalizar(_raiz->distanciaMaxima());
+
+    return _raiz;
 }
 
 void AgrupamentoArvore::exportarClassificacao(string nome_arquivo, float corte)

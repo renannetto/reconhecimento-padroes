@@ -8,6 +8,8 @@
 
 #include <exception>
 
+#include "canvas.h"
+
 #include "paletadecores.h"
 #include "distribuicaof.h"
 
@@ -25,7 +27,6 @@
 
 #include "distanciahamming.h"
 #include "distanciaeuclides.h"
-#include "canvas.h"
 
 namespace Ui {
 class MainWindow;
