@@ -81,12 +81,13 @@ void ConjuntoDeDados::normalizar()
 
     for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
     {
-        normalizarPonto(_pontos.at(indice_ponto));
+        _pontos_normalizados.push_back(normalizarPonto(_pontos.at(indice_ponto)));
     }
 }
 
-void ConjuntoDeDados::normalizarPonto(Ponto *ponto)
+Ponto * ConjuntoDeDados::normalizarPonto(Ponto *ponto)
 {
+    vector<float> atributos;
     for (int dimensao = 0; dimensao < ponto->dimensoes(); dimensao++)
     {
         if (ponto->at(dimensao) != -1)
@@ -94,53 +95,13 @@ void ConjuntoDeDados::normalizarPonto(Ponto *ponto)
             float min = _ponto_min.at(dimensao);
             float max = _ponto_max.at(dimensao);
             float atributo = ponto->at(dimensao);
-            ponto->at(dimensao, (atributo-min)/max);
-        }
-    }
-}
-
-ConjuntoDeDados * ConjuntoDeDados::estandardizar()
-{
-    ConjuntoDeDados * dados_estandardizados = new ConjuntoDeDados(_classes);
-
-    vector<float> media;
-    media.resize(dimensoes(), 0.0f);
-    vector<float> desvio_padrao;
-    desvio_padrao.resize(dimensoes(), 0.0f);
-
-    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
-    {
-        Ponto * ponto = _pontos.at(indice_ponto);
-        for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
+            atributos.push_back((atributo-min)/max);
+        } else
         {
-            media.at(dimensao) = media.at(dimensao) + ponto->at(dimensao);
+            atributos.push_back(ponto->at(dimensao));
         }
     }
-    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
-    {
-        media.at(dimensao) = media.at(dimensao) / _pontos.size();
-    }
-
-    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
-    {
-        Ponto * ponto = _pontos.at(indice_ponto);
-        for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
-        {
-            desvio_padrao.at(dimensao) = desvio_padrao.at(dimensao) + ((ponto->at(dimensao)-media.at(dimensao))*(ponto->at(dimensao)-media.at(dimensao)));
-        }
-    }
-    for (int dimensao = 0; dimensao < dimensoes(); dimensao++)
-    {
-        desvio_padrao.at(dimensao) = desvio_padrao.at(dimensao) / (_pontos.size()-1);
-    }
-
-    for (size_t indice_ponto = 0; indice_ponto < _pontos.size(); indice_ponto++)
-    {
-        Ponto * ponto = _pontos.at(indice_ponto);
-        dados_estandardizados->_pontos.push_back(ponto->estandardizar(media, desvio_padrao));
-    }
-
-    return dados_estandardizados;
+    return new Ponto(atributos, ponto->classe());
 }
 
 void ConjuntoDeDados::adicionarRuido(int incidencia, int ruido)
@@ -188,6 +149,11 @@ void ConjuntoDeDados::classes(int classes)
 const vector<Ponto*> ConjuntoDeDados::pontos()
 {
     return _pontos;
+}
+
+const vector<Ponto*> ConjuntoDeDados::pontos_normalizados()
+{
+    return _pontos_normalizados;
 }
 
 int ConjuntoDeDados::dimensoes()

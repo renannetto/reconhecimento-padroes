@@ -31,8 +31,6 @@ public:
 
     bool ambosConhecidos(Ponto * ponto2, int dimensao);
 
-    Ponto * estandardizar(vector<float> media, vector<float> desvio_padrao);
-
     void exportar(ofstream &stream);
 
     Ponto operator+(const Ponto &other);

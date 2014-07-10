@@ -2,6 +2,7 @@
 #define NODODENDOGRAMA_H
 
 #include <vector>
+#include <cmath>
 
 #include "ponto.h"
 #include "canvas.h"
@@ -18,7 +19,7 @@ public:
     float distanciaMaxima();
     void normalizar(float distancia_maxima);
 
-    void desenhar(Canvas * viewport, int posicao);
+    void desenhar(Canvas * viewport, float posicao, float posicao_pai);
 
     vector<Ponto*> pontos();
 

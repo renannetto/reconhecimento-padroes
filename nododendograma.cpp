@@ -56,23 +56,24 @@ void NodoDendograma::normalizar(float distancia_maxima)
     }
 }
 
-void NodoDendograma::desenhar(Canvas * viewport, int posicao)
+void NodoDendograma::desenhar(Canvas * viewport, float posicao, float posicao_pai)
 {
     if (_ramo1 && _ramo2)
-    {
-        float x = _distancia*viewport->height()-5.0f;
-        float x_ramo1 = _ramo1->_distancia*viewport->height();
-        float x_ramo2 = _ramo2->_distancia*viewport->height();
-        float y_ramo1 = posicao - (viewport->height() / 2.0f);
-        float y_ramo2 = posicao + (viewport->height() / 2.0f);
+    {        
+        float x = _distancia*viewport->width()-5.0f;
+        float x_ramo1 = _ramo1->_distancia*viewport->width();
+        float x_ramo2 = _ramo2->_distancia*viewport->width();
+        float largura = abs(posicao_pai - posicao);
+        float y_ramo1 = posicao - (largura / 2.0f);
+        float y_ramo2 = posicao + (largura / 2.0f);
 
         viewport->desenharLinha(x, posicao, x, y_ramo1);
         viewport->desenharLinha(x, y_ramo1, x_ramo1, y_ramo1);
         viewport->desenharLinha(x, posicao, x, y_ramo2);
         viewport->desenharLinha(x, y_ramo2, x_ramo2, y_ramo2);
 
-//        _ramo1->desenhar(viewport, y_ramo1);
-//        _ramo2->desenhar(viewport, y_ramo2);
+        _ramo1->desenhar(viewport, y_ramo1, posicao);
+        _ramo2->desenhar(viewport, y_ramo2, posicao);
     }
 }
 

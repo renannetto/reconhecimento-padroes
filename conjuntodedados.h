@@ -20,19 +20,20 @@ public:
     ~ConjuntoDeDados();
 
     void normalizar();
-    void normalizarPonto(Ponto * ponto);
-    ConjuntoDeDados * estandardizar();
+    Ponto * normalizarPonto(Ponto * ponto);
     void adicionarRuido(int incidencia, int ruido);
     void removerAtributos(int probabilidade);
 
     int classes();
     void classes(int classes);
     const vector<Ponto*> pontos();
+    const vector<Ponto*> pontos_normalizados();
     int dimensoes();
 
 protected:
     int _classes;
     vector<Ponto*> _pontos;
+    vector<Ponto*> _pontos_normalizados;
     Ponto _ponto_max;
     Ponto _ponto_min;
 };

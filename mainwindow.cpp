@@ -11,14 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     _ui->setupUi(this);
 
-    _espirais = new GeracaoEspiral(this);
-    _espirais->setVisible(false);
-
-    int largura = _ui->view_dendograma->width();
-    int altura = _ui->view_dendograma->height();
-    _aleatorio = new GeracaoAleatorio(this, largura, altura);
-    _aleatorio->setVisible(false);
-
     _ruido = new AdicionarRuido(this);
     _ruido->setVisible(false);
 
@@ -34,20 +26,8 @@ MainWindow::~MainWindow()
 {
     delete _ui;
 
-    delete _espirais;
-    delete _aleatorio;
     delete _ruido;
     delete _remover;
-}
-
-void MainWindow::gerarEspiral()
-{
-    _espirais->setVisible(true);
-}
-
-void MainWindow::gerarAleatorio()
-{
-    _aleatorio->setVisible(true);
 }
 
 void MainWindow::adicionarRuido()
@@ -143,7 +123,7 @@ void MainWindow::agruparKMeans()
         _kmeans = new KMeans(_dados, k);
         _kmeans->agrupar();
 
-        anova resultado_anova = _kmeans->testeANOVA(_dados);
+        anova resultado_anova = _kmeans->testeANOVA();
         QString sqentre_string, sqdentro_string, fscore_string, resultado_string;
         for (int dimensao = 0; dimensao < _dados->dimensoes(); dimensao++)
         {
@@ -184,7 +164,8 @@ void MainWindow::construirDendograma()
     {
         _agrupamento_arvore = new AgrupamentoArvore(_dados, distanciaCluster());
         NodoDendograma * dendograma = _agrupamento_arvore->agrupar();
-        dendograma->desenhar(_ui->view_dendograma, _ui->view_dendograma->height() / 2);
+        _ui->view_dendograma->limpar();
+        dendograma->desenhar(_ui->view_dendograma, _ui->view_dendograma->height() / 2.0f, _ui->view_dendograma->height());
     } else
     {
         QMessageBox message_box;

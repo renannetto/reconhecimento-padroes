@@ -13,9 +13,7 @@ KMeans::~KMeans()
 
 void KMeans::agrupar()
 {
-    ConjuntoDeDados * dados_estandardizados = _dados->estandardizar();
-    vector<Ponto*> pontos = _dados->pontos();
-    vector<Ponto*> pontos_estandardizados = dados_estandardizados->pontos();
+    vector<Ponto*> pontos_estandardizados = _dados->pontos_normalizados();
 
     for (size_t indice_ponto = 0; indice_ponto < pontos_estandardizados.size(); indice_ponto++)
     {
@@ -29,12 +27,6 @@ void KMeans::agrupar()
     {
         vector<Ponto> centroides = atualizarCentroides(pontos_estandardizados);
         mudanca = agruparPontos(&pontos_estandardizados, centroides);
-    }
-
-    for (size_t indice_ponto = 0; indice_ponto < pontos_estandardizados.size(); indice_ponto++)
-    {
-        Ponto * ponto = pontos_estandardizados.at(indice_ponto);
-        pontos.at(indice_ponto)->classe(ponto->classe());
     }
 }
 
@@ -103,14 +95,14 @@ bool KMeans::agruparPontos(vector<Ponto *> * pontos, vector<Ponto> centroides)
     return mudanca;
 }
 
-anova KMeans::testeANOVA(ConjuntoDeDados *dados)
+anova KMeans::testeANOVA()
 {
-    vector<Ponto*> pontos = dados->estandardizar()->pontos();
+    vector<Ponto*> pontos = _dados->pontos_normalizados();
 
     vector<Ponto> centroides = atualizarCentroides(pontos);
     vector<int> contador_cluster;
     contador_cluster.resize(_k, 0);
-    Ponto media_global(dados->dimensoes());
+    Ponto media_global(_dados->dimensoes());
 
     for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
@@ -124,21 +116,21 @@ anova KMeans::testeANOVA(ConjuntoDeDados *dados)
 
     media_global = media_global / pontos.size();
 
-    Ponto sq_entre(dados->dimensoes());
+    Ponto sq_entre(_dados->dimensoes());
     for (size_t cluster = 0; cluster < centroides.size(); cluster++)
     {
-        Ponto sq_cluster(dados->dimensoes());
+        Ponto sq_cluster(_dados->dimensoes());
         sq_cluster = centroides.at(cluster) - media_global;
         sq_cluster = sq_cluster * sq_cluster * contador_cluster.at(cluster);
 
         sq_entre = sq_entre + sq_cluster;
     }
 
-    Ponto sq_total(dados->dimensoes());
+    Ponto sq_total(_dados->dimensoes());
     for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
         Ponto * ponto = pontos.at(indice_ponto);
-        Ponto sq_ponto(dados->dimensoes());
+        Ponto sq_ponto(_dados->dimensoes());
 
         sq_ponto = *ponto - media_global;
         sq_ponto = sq_ponto * sq_ponto;
@@ -158,7 +150,7 @@ anova KMeans::testeANOVA(ConjuntoDeDados *dados)
     Ponto f_score = sq_entre_bar / sq_dentro_bar;
 
     anova resultado_anova;
-    for (int dimensao = 0; dimensao < dados->dimensoes(); dimensao++)
+    for (int dimensao = 0; dimensao < _dados->dimensoes(); dimensao++)
     {
         resultado_anova.sqentre.push_back(sq_entre.at(dimensao));
         resultado_anova.sqdentro.push_back(sq_dentro.at(dimensao));
@@ -177,9 +169,16 @@ void KMeans::exportar(string nome_arquivo)
     ofstream arquivo;
     arquivo.open(nome_arquivo.c_str());
 
-    for (size_t indice_ponto = 0; indice_ponto < _dados->pontos().size(); indice_ponto++)
+    vector<Ponto*> pontos = _dados->pontos();
+    vector<Ponto*> pontos_normalizados = _dados->pontos_normalizados();
+
+    arquivo << pontos.size() << " " << _dados->dimensoes() << " " << _k << endl;
+
+    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
-        Ponto * ponto = _dados->pontos().at(indice_ponto);
+        Ponto * ponto = pontos.at(indice_ponto);
+        Ponto * ponto_normalizado = pontos_normalizados.at(indice_ponto);
+        ponto->classe(ponto_normalizado->classe());
         ponto->exportar(arquivo);
     }
 

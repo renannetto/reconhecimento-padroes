@@ -17,7 +17,7 @@ public:
 
     void agrupar();
 
-    anova testeANOVA(ConjuntoDeDados * dados);
+    anova testeANOVA();
     void exportar(string nome_arquivo);
 
 private:

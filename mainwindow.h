@@ -13,8 +13,6 @@
 #include "paletadecores.h"
 #include "distribuicaof.h"
 
-#include "geracaoespiral.h"
-#include "geracaoaleatorio.h"
 #include "adicionarruido.h"
 #include "removeratributos.h"
 
@@ -46,8 +44,6 @@ public:
     void removerAtributos(int probabilidade);
 
 public slots:
-    void gerarEspiral();
-    void gerarAleatorio();
     void adicionarRuido();
     void removerAtributos();
     void agruparKMeans();
@@ -60,8 +56,6 @@ public slots:
 private:
     Ui::MainWindow * _ui;
 
-    GeracaoEspiral * _espirais;
-    GeracaoAleatorio * _aleatorio;
     AdicionarRuido * _ruido;
     RemoverAtributos * _remover;
 

@@ -414,8 +414,6 @@
      <string>Dados</string>
     </property>
     <addaction name="carregar_arquivo"/>
-    <addaction name="gerar_espiral"/>
-    <addaction name="gerar_aleatorio"/>
     <addaction name="adicionar_ruido"/>
     <addaction name="remover_atributos"/>
    </widget>
@@ -478,38 +476,6 @@
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>gerar_espiral</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>gerarEspiral()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>19</x>
-     <y>74</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>gerar_aleatorio</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>gerarAleatorio()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>19</x>
-     <y>74</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>carregar_arquivo</sender>
    <signal>triggered()</signal>

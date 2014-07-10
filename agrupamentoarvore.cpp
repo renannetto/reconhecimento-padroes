@@ -12,13 +12,12 @@ AgrupamentoArvore::~AgrupamentoArvore()
 
 NodoDendograma * AgrupamentoArvore::agrupar()
 {
-    ConjuntoDeDados * dados_estandardizados = _dados->estandardizar();
-    vector<Ponto*> pontos_estandardizados = dados_estandardizados->pontos();
+    vector<Ponto*> pontos = _dados->pontos_normalizados();
     set<NodoDendograma*> clusters;
-    for (size_t indice_ponto = 0; indice_ponto < pontos_estandardizados.size(); indice_ponto++)
+    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
     {
         vector<Ponto*> pontos_cluster;
-        pontos_cluster.push_back(pontos_estandardizados.at(indice_ponto));
+        pontos_cluster.push_back(pontos.at(indice_ponto));
         clusters.insert(new NodoDendograma(pontos_cluster, 0.0f, 0, 0));
     }
 
@@ -67,19 +66,24 @@ void AgrupamentoArvore::exportarClassificacao(string nome_arquivo, float corte)
     nodos_corte = _raiz->obterCorte(nodos_corte, corte);
 
     vector<Ponto*> pontos = _dados->pontos();
-    for (size_t indice_ponto = 0; indice_ponto < pontos.size(); indice_ponto++)
+    vector<Ponto*> pontos_normalizados = _dados->pontos_normalizados();
+
+    arquivo << pontos.size() << " " << _dados->dimensoes() << " " << nodos_corte.size() << endl;
+
+    for (size_t indice_ponto = 0; indice_ponto < pontos_normalizados.size(); indice_ponto++)
     {
-        Ponto * ponto = pontos.at(indice_ponto);
+        Ponto * ponto_normalizado = pontos_normalizados.at(indice_ponto);
         for (size_t indice_cluster = 0; indice_cluster < nodos_corte.size(); indice_cluster++)
         {
             NodoDendograma * cluster = nodos_corte.at(indice_cluster);
-            if (cluster->contem(ponto))
+            if (cluster->contem(ponto_normalizado))
             {
-                ponto->classe(indice_cluster);
+                ponto_normalizado->classe(indice_cluster);
+                pontos.at(indice_ponto)->classe(indice_cluster);
                 break;
             }
         }
-        ponto->exportar(arquivo);
+        pontos.at(indice_ponto)->exportar(arquivo);
     }
 
     arquivo.close();
